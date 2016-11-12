@@ -9,3 +9,5 @@ At the same time we want to explore the slip-side to this: Mining personal data 
 ## User interaction
 
 Below is a sketch for a possible user interaction with the room.
+
+![user flow](images/user_flow.jpg)
