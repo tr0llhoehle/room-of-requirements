@@ -17,6 +17,8 @@ public class Controller : MonoBehaviour {
 	void Start () {
 		StartCoroutine("GetSensorData");
 
+		LoadScene ("testobjects");
+		LoadScene ("testobject2");
 	}
 
 	// Get SensorData from server
