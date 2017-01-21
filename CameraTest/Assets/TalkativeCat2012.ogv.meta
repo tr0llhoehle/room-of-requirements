@@ -1,0 +1,49 @@
+fileFormatVersion: 2
+guid: efce391e675904719bb9769a35b446eb
+timeCreated: 1484942650
+licenseType: Free
+VideoClipImporter:
+  serializedVersion: 2
+  useLegacyImporter: 0
+  quality: 0.5
+  isColorLinear: 0
+  originalWidth: 532
+  originalHeight: 300
+  frameRange: 0
+  startFrame: -1
+  endFrame: -1
+  frameCount: 4033
+  frameRate: 50
+  colorSpace: 0
+  deinterlace: 0
+  sourceFileSize: 6295332
+  encodeAlpha: 0
+  sourceHasAlpha: 0
+  flipVertical: 0
+  flipHorizontal: 0
+  importAudio: 0
+  sourceAudioChannelCount: 
+  sourceAudioSampleRate: 
+  targetSettings: {}
+  output:
+    format: 3
+    settings:
+      enableTranscoding: 0
+      codec: 0
+      resizeFormat: 0
+      aspectRatio: 0
+      customWidth: 532
+      customHeight: 300
+      bitrateMode: 2
+      spatialQuality: 2
+    encodedWidth: 532
+    encodedHeight: 300
+    encodedStartFrame: 0
+    encodedEndFrame: 4033
+    streamedResource:
+      source: Assets/TalkativeCat2012.ogv
+      offset: 0
+      size: 6295332
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
