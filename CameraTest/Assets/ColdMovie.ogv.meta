@@ -1,22 +1,22 @@
 fileFormatVersion: 2
-guid: efce391e675904719bb9769a35b446eb
-timeCreated: 1484942650
+guid: b922b0998a49e43d1838d253b4e1f15f
+timeCreated: 1485027666
 licenseType: Free
 VideoClipImporter:
   serializedVersion: 2
   useLegacyImporter: 0
   quality: 1
   isColorLinear: 0
-  originalWidth: 532
-  originalHeight: 300
+  originalWidth: 1920
+  originalHeight: 1080
   frameRange: 0
   startFrame: -1
   endFrame: -1
-  frameCount: 4033
-  frameRate: 50
+  frameCount: 2989
+  frameRate: 25
   colorSpace: 0
   deinterlace: 0
-  sourceFileSize: 6295332
+  sourceFileSize: 3043489
   encodeAlpha: 0
   sourceHasAlpha: 0
   flipVertical: 0
@@ -30,8 +30,8 @@ VideoClipImporter:
       codec: 0
       resizeFormat: 0
       aspectRatio: 0
-      customWidth: 532
-      customHeight: 300
+      customWidth: 1920
+      customHeight: 1080
       bitrateMode: 2
       spatialQuality: 2
   output:
@@ -41,18 +41,18 @@ VideoClipImporter:
       codec: 0
       resizeFormat: 0
       aspectRatio: 0
-      customWidth: 532
-      customHeight: 300
+      customWidth: 1920
+      customHeight: 1080
       bitrateMode: 2
       spatialQuality: 2
-    encodedWidth: 532
-    encodedHeight: 300
+    encodedWidth: 1920
+    encodedHeight: 1080
     encodedStartFrame: 0
-    encodedEndFrame: 4033
+    encodedEndFrame: 2989
     streamedResource:
-      source: Assets/TalkativeCat2012.ogv
+      source: Assets/ColdMovie.ogv
       offset: 0
-      size: 6295332
+      size: 3043489
   userData: 
   assetBundleName: 
   assetBundleVariant: 

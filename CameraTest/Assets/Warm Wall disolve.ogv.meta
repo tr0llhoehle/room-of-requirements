@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: b922b0998a49e43d1838d253b4e1f15f
-timeCreated: 1485027666
+guid: 0a804aedb52a3430389b9b3170881aaf
+timeCreated: 1485345934
 licenseType: Free
 VideoClipImporter:
   serializedVersion: 2
@@ -12,11 +12,11 @@ VideoClipImporter:
   frameRange: 0
   startFrame: -1
   endFrame: -1
-  frameCount: 2989
+  frameCount: 3249
   frameRate: 25
   colorSpace: 0
   deinterlace: 0
-  sourceFileSize: 3043489
+  sourceFileSize: 3310981
   encodeAlpha: 0
   sourceHasAlpha: 0
   flipVertical: 0
@@ -39,11 +39,11 @@ VideoClipImporter:
     encodedWidth: 1920
     encodedHeight: 1080
     encodedStartFrame: 0
-    encodedEndFrame: 2989
+    encodedEndFrame: 3249
     streamedResource:
-      source: Assets/Cold wall ohne video.ogv
+      source: Assets/Warm Wall disolve.ogv
       offset: 0
-      size: 3043489
+      size: 3310981
   userData: 
   assetBundleName: 
   assetBundleVariant: 
