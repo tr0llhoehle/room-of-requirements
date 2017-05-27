@@ -17,7 +17,7 @@ function getImage(req, res) {
     res.end(data); // Send the file data to the browser.
     console.log('wrote image');
   });
-  
+}
 
 function route(sequelize) {
   router.get('/', getImage);
