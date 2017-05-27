@@ -1,0 +1,23 @@
+{
+  "name": "http-collector-interface",
+  "version": "1.0.0",
+  "description": "gathers all input data (via polling) and presents them with a unified API",
+  "main": "main.js",
+  "dependencies": {
+    "express": "^4.15.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tr0llhoehle/room-of-requirements.git"
+  },
+  "author": "p3732",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tr0llhoehle/room-of-requirements/issues"
+  },
+  "homepage": "https://github.com/tr0llhoehle/room-of-requirements#readme"
+}
