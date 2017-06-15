@@ -5,10 +5,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class CameraImage : MonoBehaviour {
-	public string url = "localhost:3000/image";
 	private RawImage raw_img;
 	private Texture2D tex;
-	private float waiting_time = 0.5f;
 
 	void Start () {
 		raw_img = GetComponent<RawImage> ();
@@ -19,17 +17,17 @@ public class CameraImage : MonoBehaviour {
 
 	IEnumerator update_and_redraw() {
 		while (true) {
-				WWW www = new WWW (url);
+				WWW www = new WWW (Utility.IMAGE_URL);
 				yield return www;
 			if (www.error == null) {
 				www.LoadImageIntoTexture (tex);
 				raw_img.texture = tex;
 			} else {
-				print ("image url not reachable");
+				print ("image url not reachable: " + Utility.IMAGE_URL);
 			}
 
 			print ("waiting");
-			yield return new WaitForSeconds (waiting_time);
+			yield return new WaitForSeconds (Utility.UPDATE_INTERVAL);
 			print ("waited");
 
 		}
