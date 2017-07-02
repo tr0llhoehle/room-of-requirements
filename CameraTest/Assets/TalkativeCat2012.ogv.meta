@@ -22,8 +22,8 @@ VideoClipImporter:
   flipVertical: 0
   flipHorizontal: 0
   importAudio: 0
-  sourceAudioChannelCount: 
-  sourceAudioSampleRate: 
+  sourceAudioChannelCount: 0200
+  sourceAudioSampleRate: 44ac0000
   targetSettings:
     0:
       enableTranscoding: 0
@@ -50,7 +50,7 @@ VideoClipImporter:
     encodedStartFrame: 0
     encodedEndFrame: 4033
     streamedResource:
-      source: Assets/TalkativeCat2012.ogv
+      source: 
       offset: 0
       size: 6295332
   userData: 
