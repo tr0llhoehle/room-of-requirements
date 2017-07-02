@@ -4,6 +4,7 @@
   "description": "gathers all input data (via polling) and presents them with a unified API",
   "main": "main.js",
   "dependencies": {
+    "body-parser": "^1.17.2",
     "express": "^4.15.3"
   },
   "devDependencies": {},
