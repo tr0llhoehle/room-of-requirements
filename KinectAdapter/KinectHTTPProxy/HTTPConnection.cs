@@ -8,7 +8,7 @@ namespace KinectHTTPProxy
 {
     class HTTPConnection
     {
-        private Uri server = new Uri("http://127.0.0.1:8080");
+        private Uri server = new Uri("http://127.0.0.1:3000/kinect");
 
         public void SendData(FaceData data)
         {
