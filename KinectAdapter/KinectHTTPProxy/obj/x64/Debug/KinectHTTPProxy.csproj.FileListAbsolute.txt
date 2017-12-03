@@ -1,0 +1,140 @@
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\Expression\ExpressionRandomForest.model
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\Expression\EyeLeftRandomForest.model
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\Expression\EyeRightRandomForest.model
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\Expression\FacialHairIRRandomForest.model
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\Expression\FacialHairRandomForest.model
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\Expression\Feature.config
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\Expression\GlassesIRRandomForest.model
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\Expression\GlassesRandomForest.model
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\Expression\LookingAwayRandomForest.model
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\Expression\MouthMovedRandomForest.model
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\Expression\MouthOpenRandomForest.model
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\FaceAlignment.bin
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\FaceAlignmentColor.bin
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\FaceAlignmentColor27.bin
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\FaceDetector.bin
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\FaceOrientation.bin
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\FaceTrackingColor27.bin
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\AAMModel\3DModel.bin
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\AAMModel\3DModel_globalPCA.bin
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\AAMModel\AAMModelData_F.bin
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\AAMModel\AAMModelData_HLP.bin
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\AAMModel\AAMModelData_HRP.bin
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\AAMModel\PCAMaskBias.bin
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\EvalModel\front.mod.bin
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\EvalModel\front_nose.mod.bin
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\EvalModel\left.mod.bin
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\EvalModel\left_nose.mod.bin
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\EvalModel\right.mod.bin
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\EvalModel\right_nose.mod.bin
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\EyeState\EyeClose.pra
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\EyeState\EyeClose.wgh
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\EyeState\LeftCloseRightOpen44Flip.pra
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\EyeState\LeftCloseRightOpen44Flip.wgh
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\EyeState\LeftOpenRightClose44Flip.pra
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\EyeState\LeftOpenRightClose44Flip.wgh
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\MouthModel\close.mod.bin
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\MouthModel\lopen.mod.bin
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\ViewModel\front.mod.bin
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\ViewModel\left.mod.bin
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\ViewModel\right.mod.bin
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\WholeHeadModel\fullMeanHead60_tri.ply
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\Expression\NuiExpressionModelManifest.txt
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\AAMModel\Map2D3D_F.txt
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\AAMModel\Map2D3D_HLP.txt
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\AAMModel\Map2D3D_HRP.txt
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\EvalModel\Front.p.txt
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\EvalModel\left.p.txt
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\EvalModel\right.p.txt
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\MouthModel\close.p.txt
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\MouthModel\lopen.p.txt
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\MouthModel\MeanShapes.txt
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\SkintoneModel\skintone_appearance_classifier.txt
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\SkintoneModel\skintone_shape_classifier.txt
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\ViewModel\front.p.txt
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\ViewModel\left.p.txt
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\ViewModel\right.p.txt
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\WholeHeadModel\FullHeadMaskVertexCorrespondence.txt
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\KinectHTTPProxy.exe.config
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\KinectHTTPProxy.exe
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\KinectHTTPProxy.pdb
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\KinectFaceTracker.dll
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\Microsoft.Kinect.dll
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\Microsoft.Kinect.Face.dll
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\KinectFaceTracker.pdb
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\KinectFaceTracker.dll.config
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\Microsoft.Kinect.xml
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\bin\x64\Debug\Microsoft.Kinect.Face.xml
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\obj\x64\Debug\KinectHTTPProxy.csprojResolveAssemblyReference.cache
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\obj\x64\Debug\KinectHTTPProxy.exe
+C:\Users\patrick\Documents\Visual Studio 2017\Projects\ConsoleApp1\KinectHTTPProxy\obj\x64\Debug\KinectHTTPProxy.pdb
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\Expression\ExpressionRandomForest.model
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\Expression\EyeLeftRandomForest.model
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\Expression\EyeRightRandomForest.model
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\Expression\FacialHairIRRandomForest.model
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\Expression\FacialHairRandomForest.model
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\Expression\Feature.config
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\Expression\GlassesIRRandomForest.model
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\Expression\GlassesRandomForest.model
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\Expression\LookingAwayRandomForest.model
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\Expression\MouthMovedRandomForest.model
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\Expression\MouthOpenRandomForest.model
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\FaceAlignment.bin
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\FaceAlignmentColor.bin
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\FaceAlignmentColor27.bin
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\FaceDetector.bin
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\FaceOrientation.bin
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\FaceTrackingColor27.bin
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\AAMModel\3DModel.bin
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\AAMModel\3DModel_globalPCA.bin
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\AAMModel\AAMModelData_F.bin
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\AAMModel\AAMModelData_HLP.bin
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\AAMModel\AAMModelData_HRP.bin
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\AAMModel\PCAMaskBias.bin
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\EvalModel\front.mod.bin
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\EvalModel\front_nose.mod.bin
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\EvalModel\left.mod.bin
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\EvalModel\left_nose.mod.bin
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\EvalModel\right.mod.bin
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\EvalModel\right_nose.mod.bin
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\EyeState\EyeClose.pra
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\EyeState\EyeClose.wgh
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\EyeState\LeftCloseRightOpen44Flip.pra
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\EyeState\LeftCloseRightOpen44Flip.wgh
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\EyeState\LeftOpenRightClose44Flip.pra
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\EyeState\LeftOpenRightClose44Flip.wgh
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\MouthModel\close.mod.bin
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\MouthModel\lopen.mod.bin
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\ViewModel\front.mod.bin
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\ViewModel\left.mod.bin
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\ViewModel\right.mod.bin
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\WholeHeadModel\fullMeanHead60_tri.ply
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\Expression\NuiExpressionModelManifest.txt
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\AAMModel\Map2D3D_F.txt
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\AAMModel\Map2D3D_HLP.txt
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\AAMModel\Map2D3D_HRP.txt
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\EvalModel\Front.p.txt
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\EvalModel\left.p.txt
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\EvalModel\right.p.txt
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\MouthModel\close.p.txt
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\MouthModel\lopen.p.txt
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\MouthModel\MeanShapes.txt
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\SkintoneModel\skintone_appearance_classifier.txt
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\SkintoneModel\skintone_shape_classifier.txt
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\ViewModel\front.p.txt
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\ViewModel\left.p.txt
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\ViewModel\right.p.txt
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\NuiDatabase\HDFaceTracker\WholeHeadModel\FullHeadMaskVertexCorrespondence.txt
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\KinectHTTPProxy.exe.config
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\KinectHTTPProxy.exe
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\KinectHTTPProxy.pdb
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\KinectFaceTracker.dll
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\Microsoft.Kinect.dll
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\Microsoft.Kinect.Face.dll
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\KinectFaceTracker.pdb
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\KinectFaceTracker.dll.config
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\Microsoft.Kinect.xml
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Debug\Microsoft.Kinect.Face.xml
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\obj\x64\Debug\KinectHTTPProxy.csprojResolveAssemblyReference.cache
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\obj\x64\Debug\KinectHTTPProxy.exe
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\obj\x64\Debug\KinectHTTPProxy.pdb
