@@ -16,6 +16,10 @@ function setState(req, res) {
       console.log(JSON.stringify(req.body));
       state = req.body;
   }
+  else
+  {
+      console.log("Reject");
+  }
   res.sendStatus(200);
 }
 

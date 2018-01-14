@@ -21,7 +21,7 @@ public class SpotMove : MonoBehaviour {
         if (GameModel.Instance.faceData != null)
         {
             angle = GameModel.Instance.faceData.yaw;
-            spottrans.eulerAngles = new Vector3(0, angle, 0);
+            spottrans.eulerAngles = new Vector3(0, angle*-2, 0);
         }
 	}
 }

@@ -80,6 +80,7 @@
   <ItemGroup>
     <Compile Include="FaceData.cs" />
     <Compile Include="Kinect.cs" />
+    <Compile Include="MovingAverage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

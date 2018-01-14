@@ -6,12 +6,14 @@ namespace KinectHTTPProxy
     {
         private Kinect sensor = new Kinect();
         private HTTPConnection connection = new HTTPConnection();
+        private MovingAverage avg;
 
         public Kinect2HTTP()
         {
             this.sensor.Setup();
 
-            this.sensor.Changed += this.Sensor_Changed;
+            avg = new MovingAverage(this.sensor);
+            this.avg.Changed += this.Sensor_Changed;
         }
 
         public void Shutdown()
