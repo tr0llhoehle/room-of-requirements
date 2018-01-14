@@ -83,7 +83,7 @@ function route(sequelize) {
     csv.parse(data, function(err, data){
       warm_wall = data;
       if (err) {
-        console.log("Could not parse cold_wall.csv file");
+        console.log("Could not parse warm_wall.csv file");
       }
     });
     console.log('read warm_wall.csv file');
