@@ -48,8 +48,11 @@
   <ItemGroup>
      <Compile Include="Assets\CameraImage.cs" />
      <Compile Include="Assets\ClockAnimator.cs" />
+     <Compile Include="Assets\PersonalityBar.cs" />
+     <Compile Include="Assets\PersonalityInfo.cs" />
      <Compile Include="Assets\TestValue.cs" />
      <Compile Include="Assets\TestValueBar.cs" />
+     <Compile Include="Assets\Utility.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/home/pet/.system/bin/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
