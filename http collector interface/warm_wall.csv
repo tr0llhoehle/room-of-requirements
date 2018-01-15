@@ -1,0 +1,19 @@
+Zeit,Zeit(s),Farbe 1,Farbe 2,Farbe 3 
+0:00-0:10,0-9,yellow,red,pink
+0:10-0:16,10-15,orange,yellow,pink
+0:16-0:19,16-18,peach,yellow,pink
+0:19-0:29,19-28,pink,light yellow,orange
+0:29-0:33,29-32,peach,pink,orange
+0:33-0:40,33-39,peach,pink,light yellow
+0:40-0:46,40-45,light yellow,peach,pink
+0:46-0:52,46-51,light yellow,light pink,pink
+0:52-0:55,52-54,light yellow,light blue,pink
+0:55-1:01,55-60,yellow,light green,pink
+1:01-:06,61-NaN,pink,yellow,light yellow
+1:06-1:11,66-70,red,orange,yellow
+1:11-1:21,71-80,red,peach,yellow
+1:21-1:30,81-89,pink,peach,orange
+1:30-1:41,90-100,pink,yellow,orange
+1:41-2:00,101-119,pink,light pink,yellow
+2:00-2:04,120-123,peach,yellow,pink
+2:04-2:08,124-127,orange,red,yellow
