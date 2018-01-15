@@ -13,12 +13,12 @@ function getState(req, res) {
 function setState(req, res) {
   if (state.time < req.body.time)
   {
-      console.log(JSON.stringify(req.body));
+      console.log('gesture: ' + JSON.stringify(req.body));
       state = req.body;
   }
   else
   {
-      console.log("Reject");
+      console.log("gesture: reject");
   }
   res.sendStatus(200);
 }

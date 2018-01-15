@@ -13,14 +13,14 @@ namespace KinectFaceTracker
         private int stepsPerChange = 3;
         private int step = 0;
 
-        public event ChangedEventHandler Changed;
+        public event FaceChangedEventHandler FaceChanged;
 
         public MovingAverage(Kinect sensor)
         {
-            sensor.Changed += Sensor_Changed;
+            sensor.FaceChanged += Face_Changed;
         }
 
-        private void Sensor_Changed(object sender, FaceData faceData)
+        private void Face_Changed(object sender, FaceData faceData)
         {
             buffer.Add(faceData);
             if (buffer.Count > maxBuffer)
@@ -49,7 +49,7 @@ namespace KinectFaceTracker
             step++;
             if (step == stepsPerChange)
             {
-                Changed(this, newEstimation);
+                FaceChanged(this, newEstimation);
                 step = 0;
             }
         }

@@ -133,3 +133,4 @@ C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectFaceT
 C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectFaceTracker\obj\x64\Debug\KinectFaceTracker.dll
 C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectFaceTracker\obj\x64\Debug\KinectFaceTracker.pdb
 C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectFaceTracker\obj\x64\Debug\KinectFaceTracker.csprojResolveAssemblyReference.cache
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectFaceTracker\obj\x64\Debug\KinectFaceTracker.csproj.CoreCompileInputs.cache

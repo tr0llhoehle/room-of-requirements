@@ -13,7 +13,8 @@ namespace KinectHTTPProxy
             this.sensor.Setup();
 
             avg = new MovingAverage(this.sensor);
-            this.avg.Changed += this.Sensor_Changed;
+            this.avg.FaceChanged += this.Face_Changed;
+            this.sensor.GestureChanged += this.Gesture_Changed;
         }
 
         public void Shutdown()
@@ -21,9 +22,14 @@ namespace KinectHTTPProxy
             sensor.Shutdown();
         }
 
-        private void Sensor_Changed(object sender, FaceData faceData)
+        private void Face_Changed(object sender, FaceData faceData)
         {
             connection.SendData(faceData);
+        }
+
+        private void Gesture_Changed(object sender, GestureData gestureData)
+        {
+            connection.SendData(gestureData);
         }
     }
 }

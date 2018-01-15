@@ -79,6 +79,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FaceData.cs" />
+    <Compile Include="GestureData.cs" />
+    <Compile Include="GestureRecognition.cs" />
     <Compile Include="Kinect.cs" />
     <Compile Include="MovingAverage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

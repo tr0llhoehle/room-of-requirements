@@ -11,11 +11,13 @@ namespace KinectFaceTracker
     using Microsoft.Kinect.Face;
     using System.Windows;
 
-    public delegate void ChangedEventHandler(object sender, FaceData e);
+    public delegate void FaceChangedEventHandler(object sender, FaceData e);
+    public delegate void GestureChangedEventHandler(object sender, GestureData e);
 
     public class Kinect
     {
-        public event ChangedEventHandler Changed;
+        public event FaceChangedEventHandler FaceChanged;
+        public event GestureChangedEventHandler GestureChanged;
 
         /// <summary>
         /// Face rotation display angle increment in degrees
@@ -41,6 +43,7 @@ namespace KinectFaceTracker
         /// Array to store bodies
         /// </summary>
         private Body[] bodies = null;
+        private GestureRecognition[] gestureTrackers = null;
 
         /// <summary>
         /// Number of bodies tracked
@@ -107,6 +110,7 @@ namespace KinectFaceTracker
 
             // allocate storage to store body objects
             this.bodies = new Body[this.bodyCount];
+            this.gestureTrackers = new GestureRecognition[this.bodyCount];
 
             // specify the required face frame results
             FaceFrameFeatures faceFrameFeatures =
@@ -132,6 +136,8 @@ namespace KinectFaceTracker
 
                 // open the corresponding reader
                 this.faceFrameReaders[i] = this.faceFrameSources[i].OpenReader();
+
+                this.gestureTrackers[i] = new GestureRecognition();
             }
 
             // allocate storage to store face frame results for each face in the FOV
@@ -173,10 +179,16 @@ namespace KinectFaceTracker
         }
 
         // Invoke the Changed event; called whenever list changes
-        protected virtual void OnChanged(FaceData e)
+        protected virtual void OnFaceChanged(FaceData e)
         {
-            if (Changed != null)
-                Changed(this, e);
+            if (FaceChanged != null)
+                FaceChanged(this, e);
+        }
+
+        protected virtual void OnGestureChanged(GestureData e)
+        {
+            if (GestureChanged != null)
+                GestureChanged(this, e);
         }
 
         public void Setup()
@@ -294,28 +306,37 @@ namespace KinectFaceTracker
                     // update body data
                     bodyFrame.GetAndRefreshBodyData(this.bodies);
 
+                    // iterate through each face source
+                    for (int i = 0; i < this.bodyCount; i++)
                     {
-                        // iterate through each face source
-                        for (int i = 0; i < this.bodyCount; i++)
+                        bool changed = this.gestureTrackers[i].Update(this.bodies[i]);
+                        if (changed)
                         {
-                            // check if a valid face is tracked in this face source
-                            if (this.faceFrameSources[i].IsTrackingIdValid)
+                            GestureData g = new GestureData();
+                            g.time = (ulong)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
+                            g.id = this.bodies[i].TrackingId;
+                            g.type = this.gestureTrackers[i].gesture;
+                            OnGestureChanged(g);
+                        }
+
+                        // check if a valid face is tracked in this face source
+                        if (this.faceFrameSources[i].IsTrackingIdValid)
+                        {
+                            // check if we have valid face frame results
+                            if (this.faceFrameResults[i] != null)
                             {
-                                // check if we have valid face frame results
-                                if (this.faceFrameResults[i] != null)
-                                {
-                                    // draw face frame results
-                                    this.PrintFaceFrameResults(i, this.faceFrameResults[i]);
-                                }
+                                // draw face frame results
+                                this.PrintFaceFrameResults(i, this.faceFrameResults[i]);
                             }
-                            else
+                        }
+                        else
+                        {
+                            //Console.WriteLine(String.Format("{0}, {1}", i, this.bodies[i].IsTracked));
+                            // check if the corresponding body is tracked 
+                            if (this.bodies[i].IsTracked)
                             {
-                                // check if the corresponding body is tracked 
-                                if (this.bodies[i].IsTracked)
-                                {
-                                    // update the face frame source to track this body
-                                    this.faceFrameSources[i].TrackingId = this.bodies[i].TrackingId;
-                                }
+                                // update the face frame source to track this body
+                                this.faceFrameSources[i].TrackingId = this.bodies[i].TrackingId;
                             }
                         }
                     }
@@ -356,7 +377,7 @@ namespace KinectFaceTracker
             Body body = this.bodies[faceIndex];
             if (body.IsTracked)
             {
-                OnChanged(faceData);
+                OnFaceChanged(faceData);
             }
         }
 

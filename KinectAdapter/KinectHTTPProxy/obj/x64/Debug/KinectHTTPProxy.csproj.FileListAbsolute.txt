@@ -138,3 +138,4 @@ C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPP
 C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\obj\x64\Debug\KinectHTTPProxy.csprojResolveAssemblyReference.cache
 C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\obj\x64\Debug\KinectHTTPProxy.exe
 C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\obj\x64\Debug\KinectHTTPProxy.pdb
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\obj\x64\Debug\KinectHTTPProxy.csproj.CoreCompileInputs.cache

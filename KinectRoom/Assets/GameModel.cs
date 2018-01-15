@@ -19,6 +19,20 @@ public class FaceData
     }
 }
 
+[System.Serializable]
+public class GestureData
+{
+    public int type;
+    public ulong id;
+    public ulong time;
+
+    public static GestureData CreateFromJSON(string jsonString)
+    {
+        return JsonUtility.FromJson<GestureData>(jsonString);
+    }
+}
+
+
 public class GameModel {
 
     private static GameModel instance;
@@ -31,4 +45,6 @@ public class GameModel {
     }
 
     public FaceData faceData = null;
+    public GestureData gestureData = null;
+    public bool agreed = false;
 }
