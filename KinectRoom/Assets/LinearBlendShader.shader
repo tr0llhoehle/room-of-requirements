@@ -11,7 +11,7 @@ Shader "HorizontalBlendShader" {
    }
    SubShader {
       Pass {	
-         Tags { "LightMode" = "ForwardAdd" } 
+         Tags { "LightMode" = "Always" } 
             // pass for the first, directional light 
  
          CGPROGRAM
@@ -20,8 +20,6 @@ Shader "HorizontalBlendShader" {
          #pragma fragment frag 
  
          #include "UnityCG.cginc"
-         uniform float4 _LightColor0; 
-            // color of light source (from "Lighting.cginc")
  
          uniform sampler2D _MainTex;
          uniform sampler2D _DecalTex;
@@ -52,8 +50,7 @@ Shader "HorizontalBlendShader" {
             float3 lightDirection = normalize(
                _WorldSpaceLightPos0.xyz);
  
-            output.levelOfLighting = 
-               max(0.0, dot(normalDirection, lightDirection));
+            output.levelOfLighting = 1.0;
             output.tex = input.texcoord;
             output.pos = UnityObjectToClipPos(input.vertex);
             return output;

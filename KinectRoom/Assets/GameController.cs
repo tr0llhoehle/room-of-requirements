@@ -22,12 +22,15 @@ public class GameController : MonoBehaviour
     private State state = State.INITIAL;
     private TextMesh centerText = null;
     private Transform disclaimerTransform = null;
+    private SpriteRenderer handsUp = null;
 
 
     private void Start()
     {
         centerText = GameObject.Find("CenterText").GetComponent<TextMesh>();
         disclaimerTransform = GameObject.Find("DisclaimerText").GetComponent<Transform>();
+        handsUp = GameObject.Find("HandsUp").GetComponent<SpriteRenderer>();
+        handsUp.color = new Color(1f, 1f, 1f, 0);
     }
 
     private ulong GetUnixNow()
@@ -92,6 +95,7 @@ public class GameController : MonoBehaviour
         if (HasFace())
         {
             GameModel.Instance.agreed = false;
+            centerText.text = "";
             return State.DISCLAIMER;
         }
         return State.INITIAL;
@@ -121,10 +125,12 @@ public class GameController : MonoBehaviour
             sessionStart = GetUnixNow();
             centerText.text = "";
             disclaimerTransform.transform.position = new Vector3(0f, -4.31f, 3.037f);
+            handsUp.color = new Color(1f, 1f, 1f, 0);
             return State.SCENE;
         }
 
-        disclaimerTransform.Translate(Vector3.up * Time.deltaTime, Space.World);
+        disclaimerTransform.Translate(Vector3.up * Time.deltaTime * 2, Space.World);
+        handsUp.color = new Color(1f, 1f, 1f, Mathf.PingPong(Time.time, 1));
         return State.DISCLAIMER;
     }
 
@@ -133,7 +139,7 @@ public class GameController : MonoBehaviour
         if (!HasFace())
         {
             lostStart = GetUnixNow();
-            centerText.text = "Where are you?";
+            centerText.text = "???";
             return State.LOST_USER;
         }
 

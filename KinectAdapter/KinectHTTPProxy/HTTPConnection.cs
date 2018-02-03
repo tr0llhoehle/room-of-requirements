@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Web.Script.Serialization;
 using System.Net;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 using KinectFaceTracker;
 
@@ -11,6 +13,8 @@ namespace KinectHTTPProxy
         private String baseURL = "http://127.0.0.1:3000";
         private Uri faceServer;
         private Uri gestureServer;
+        private Uri depthServer;
+        private Uri colorServer;
 
         private JavaScriptSerializer ser = new JavaScriptSerializer();
 
@@ -18,17 +22,67 @@ namespace KinectHTTPProxy
         {
             faceServer = new Uri(baseURL + "/face");
             gestureServer = new Uri(baseURL + "/gesture");
+            colorServer = new Uri(baseURL + "/current_image");
+            depthServer = new Uri(baseURL + "/depth");
+        }
+
+        private void SendImage(Bitmap bm, Uri url)
+        {
+            byte[] result;
+            using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
+            {
+                if (bm.PixelFormat == PixelFormat.Format16bppGrayScale)
+                {
+                    // FIXME: gray scale conversion does not work
+                    return;
+                    /*
+                    
+                    Bitmap rgb_bm = new Bitmap(bm.Width, bm.Height,
+                        System.Drawing.Imaging.PixelFormat.Format32bppRgb);
+
+                    using (Graphics gr = Graphics.FromImage(rgb_bm))
+                    {
+                        gr.DrawImage(bm, new Rectangle(0, 0, rgb_bm.Width, rgb_bm.Height));
+                    }
+
+                    bm = rgb_bm;
+                    */
+                }
+
+                bm.Save(stream, ImageFormat.Png);
+
+                result = stream.ToArray();
+            }
+
+            Console.WriteLine(String.Format("PNG {0} bytes", result.Length) + "->" + url.ToString());
+
+
+            using (WebClient wc = new WebClient())
+            {
+                wc.Headers[HttpRequestHeader.ContentType] = "image/png";
+                wc.UploadData(url, "POST", result);
+            }
         }
 
         private void SendData(String json, Uri url)
         {
-            Console.WriteLine(json + "->" + url.ToString());
+            //Console.WriteLine(json + "->" + url.ToString());
 
             using (WebClient wc = new WebClient())
             {
                 wc.Headers[HttpRequestHeader.ContentType] = "application/json";
                 wc.UploadStringAsync(url, "POST", json);
             }
+        }
+
+        public void SendDepthImage(Bitmap bm)
+        {
+            SendImage(bm, depthServer);
+        }
+
+        public void SendColorImage(Bitmap bm)
+        {
+            SendImage(bm, colorServer);
         }
 
         public void SendData(FaceData data)

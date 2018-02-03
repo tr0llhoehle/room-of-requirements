@@ -129,7 +129,6 @@ C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectFaceT
 C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectFaceTracker\bin\x64\Release\Microsoft.Kinect.Face.dll
 C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectFaceTracker\bin\x64\Release\Microsoft.Kinect.xml
 C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectFaceTracker\bin\x64\Release\Microsoft.Kinect.Face.xml
-C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectFaceTracker\obj\x64\Release\KinectFaceTracker.csprojResolveAssemblyReference.cache
 C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectFaceTracker\obj\x64\Release\KinectFaceTracker.csproj.CoreCompileInputs.cache
 C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectFaceTracker\obj\x64\Release\KinectFaceTracker.dll
 C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectFaceTracker\obj\x64\Release\KinectFaceTracker.pdb

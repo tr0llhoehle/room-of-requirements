@@ -10,14 +10,20 @@ namespace KinectFaceTracker
     using Microsoft.Kinect;
     using Microsoft.Kinect.Face;
     using System.Windows;
+    using System.Drawing;
+    using System.Drawing.Imaging;
 
     public delegate void FaceChangedEventHandler(object sender, FaceData e);
     public delegate void GestureChangedEventHandler(object sender, GestureData e);
+    public delegate void ColorImageEventHandler(object sender, Bitmap e);
+    public delegate void DepthFrameEventHandler(object sender, Bitmap e);
 
     public class Kinect
     {
         public event FaceChangedEventHandler FaceChanged;
         public event GestureChangedEventHandler GestureChanged;
+        public event ColorImageEventHandler ColorImageChanged;
+        public event DepthFrameEventHandler DepthImageChanged;
 
         /// <summary>
         /// Face rotation display angle increment in degrees
@@ -38,6 +44,9 @@ namespace KinectFaceTracker
         /// Reader for body frames
         /// </summary>
         private BodyFrameReader bodyFrameReader = null;
+
+        private ColorFrameReader colorFrameReader = null;
+        private DepthFrameReader depthFrameReader = null;
 
         /// <summary>
         /// Array to store bodies
@@ -98,6 +107,12 @@ namespace KinectFaceTracker
             this.displayWidth = frameDescription.Width;
             this.displayHeight = frameDescription.Height;
             this.displayRect = new Rect(0.0, 0.0, this.displayWidth, this.displayHeight);
+
+            this.colorFrameReader = this.kinectSensor.ColorFrameSource.OpenReader();
+            this.colorFrameReader.FrameArrived += this.Reader_ColorFrameArrived;
+
+            this.depthFrameReader = this.kinectSensor.DepthFrameSource.OpenReader();
+            this.depthFrameReader.FrameArrived += this.Reader_DepthFrameArrived;
 
             // open the reader for the body frames
             this.bodyFrameReader = this.kinectSensor.BodyFrameSource.OpenReader();
@@ -178,17 +193,27 @@ namespace KinectFaceTracker
             roll = (int)(Math.Floor((rollD + ((increment / 2.0) * (rollD > 0 ? 1.0 : -1.0))) / increment) * increment);
         }
 
+        protected virtual void OnColorImageChanged(Bitmap e)
+        {
+            ColorImageChanged.Invoke(this, e);
+        }
+
+        protected virtual void OnDepthImageChanged(Bitmap e)
+        {
+            DepthImageChanged.Invoke(this, e);
+        }
+
         // Invoke the Changed event; called whenever list changes
         protected virtual void OnFaceChanged(FaceData e)
         {
-            if (FaceChanged != null)
-                FaceChanged(this, e);
+
+            FaceChanged.Invoke(this, e);
         }
 
         protected virtual void OnGestureChanged(GestureData e)
         {
-            if (GestureChanged != null)
-                GestureChanged(this, e);
+
+            GestureChanged.Invoke(this, e);
         }
 
         public void Setup()
@@ -208,6 +233,7 @@ namespace KinectFaceTracker
                 this.bodyFrameReader.FrameArrived += this.Reader_BodyFrameArrived;
             }
         }
+
 
         public void Shutdown()
         {
@@ -239,6 +265,44 @@ namespace KinectFaceTracker
             {
                 this.kinectSensor.Close();
                 this.kinectSensor = null;
+            }
+        }
+
+        private void Reader_ColorFrameArrived(object sender, ColorFrameArrivedEventArgs e)
+        {
+            for (int i = 0; i < this.bodyCount; i++)
+            {
+                if (this.faceFrameSources[i].IsTrackingIdValid && this.faceFrameResults[i] != null)
+                {
+                    ColorFrame frame = e.FrameReference.AcquireFrame();
+                    byte[] frameData = new byte[this.displayHeight * this.displayWidth * 4];
+                    frame.CopyConvertedFrameDataToArray(frameData, ColorImageFormat.Rgba);
+
+                    Bitmap mp = new Bitmap(this.displayWidth, this.displayHeight, PixelFormat.Format32bppRgb);
+                    OnColorImageChanged(mp);
+                    break;
+                }
+            }
+        }
+
+        private void     Reader_DepthFrameArrived(object sender, DepthFrameArrivedEventArgs e)
+        {
+            for (int i = 0; i < this.bodyCount; i++)
+            {
+                if (this.faceFrameSources[i].IsTrackingIdValid && this.faceFrameResults[i] != null)
+                {
+                    int height = depthFrameReader.DepthFrameSource.FrameDescription.Height;
+                    int width = depthFrameReader.DepthFrameSource.FrameDescription.Width;
+
+                    DepthFrame frame = e.FrameReference.AcquireFrame();
+                    ushort[] frameData = new ushort[height * width];
+                    frame.CopyFrameDataToArray(frameData);
+
+                    Bitmap mp = new Bitmap(this.displayWidth, this.displayHeight, PixelFormat.Format16bppGrayScale);
+
+                    OnDepthImageChanged(mp);
+                    break;
+                }
             }
         }
 
@@ -406,7 +470,7 @@ namespace KinectFaceTracker
                         var facePoints = faceResult.FacePointsInColorSpace;
                         if (facePoints != null)
                         {
-                            foreach (PointF pointF in facePoints.Values)
+                            foreach (Microsoft.Kinect.PointF pointF in facePoints.Values)
                             {
                                 // check if we have a valid face point within the bounds of the screen space
                                 bool isFacePointValid = pointF.X > 0.0f &&
