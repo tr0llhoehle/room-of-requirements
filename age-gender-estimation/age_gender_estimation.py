@@ -2,9 +2,6 @@ import os
 from flask import Flask, request, redirect, url_for
 from werkzeug.utils import secure_filename
 
-UPLOAD_FOLDER = '/Users/fakeman/Documents/uni/hfg/age-gender-estimation/uploads'
-ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
-
 import os
 import cv2
 import dlib
@@ -12,6 +9,11 @@ import numpy as np
 import argparse
 from wide_resnet import WideResNet
 import io
+
+import requests
+import shutil
+
+IMAGE_URL = "http://localhost:3000/current_image"
 
 
 def get_args():
@@ -89,48 +91,40 @@ def main(img):
         predicted_genders = results[0]
         ages = np.arange(0, 101).reshape(101, 1)
         predicted_ages = results[1].dot(ages).flatten()
-        label = "\"age\": {}, \"gender\": \"{}\"".format(int(predicted_ages[0]), "f" if predicted_genders[0][0] > 0.5 else "m")
+        label = "\"state\":\"success\",\"age\": {}, \"gender\": \"{}\"".format(int(predicted_ages[0]), "f" if predicted_genders[0][0] > 0.5 else "m")
         #print(label)
         return label
-    return "not face detected"
+    return "\"state\":\"error\""
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
+    if request.method == 'GET':
+        #url = 'https://upload.wikimedia.org/wikipedia/commons/8/8d/President_Barack_Obama.jpg'
+        url = IMAGE_URL
+        response = requests.get(url, stream=True)
+        in_memory_file = io.BytesIO()
+        shutil.copyfileobj(response.raw, in_memory_file)
+        data = np.fromstring(in_memory_file.getvalue(), dtype=np.uint8)
+        color_image_flag = 1
+        img = cv2.imdecode(data, color_image_flag)
+
+        return "{"+main(img)+"}"
     if request.method == 'POST':
         # check if the post request has the file part
         if 'file' not in request.files:
-            return 'No file part'
-            #return redirect(request.url)
+            return "{"+"\"state\":\"error\""+"}"
         file = request.files['file']
         # if user does not select file, browser also
         # submit a empty part without filename
         if file.filename == '':
-            return 'No selected file'
-            #return redirect(request.url)
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-
+            return "{"+"\"state\":\"error\""+"}"
+        if file:
             in_memory_file = io.BytesIO()
             file.save(in_memory_file)
             data = np.fromstring(in_memory_file.getvalue(), dtype=np.uint8)
             color_image_flag = 1
             img = cv2.imdecode(data, color_image_flag)
 
-            #file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             return "{"+main(img)+"}"
-    return '''
-    <!doctype html>
-    <title>Upload new File</title>
-    <h1>Upload new File</h1>
-    <form method=post enctype=multipart/form-data>
-      <p><input type=file name=file>
-         <input type=submit value=Upload>
-    </form>
-    '''
