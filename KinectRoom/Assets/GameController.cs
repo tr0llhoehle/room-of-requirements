@@ -23,14 +23,21 @@ public class GameController : MonoBehaviour
     private TextMesh centerText = null;
     private Transform disclaimerTransform = null;
     private SpriteRenderer handsUp = null;
-
+    private SpriteRenderer leaving = null;
+    private SpriteRenderer loading = null;
 
     private void Start()
     {
         centerText = GameObject.Find("CenterText").GetComponent<TextMesh>();
         disclaimerTransform = GameObject.Find("DisclaimerText").GetComponent<Transform>();
         handsUp = GameObject.Find("HandsUp").GetComponent<SpriteRenderer>();
+        leaving = GameObject.Find("Leaving").GetComponent<SpriteRenderer>();
+        loading = GameObject.Find("Loading").GetComponent<SpriteRenderer>();
+
         handsUp.color = new Color(1f, 1f, 1f, 0);
+        leaving.color = new Color(1f, 1f, 1f, 0);
+        loading.color = new Color(1f, 1f, 1f, 0);
+
     }
 
     private ulong GetUnixNow()
@@ -90,12 +97,12 @@ public class GameController : MonoBehaviour
 
     private State UpdateInitial()
     {
-        centerText.text = "Waiting.";
+        loading.color = new Color(1f, 1f, 1f, Mathf.PingPong(Time.time, 1));
 
         if (HasFace())
         {
             GameModel.Instance.agreed = false;
-            centerText.text = "";
+            loading.color = new Color(1f, 1f, 1f, 0);
             return State.DISCLAIMER;
         }
         return State.INITIAL;
@@ -106,6 +113,7 @@ public class GameController : MonoBehaviour
         if (!HasFace())
         {
             disclaimerTransform.transform.position = new Vector3(0f, -4.31f, 3.037f);
+            handsUp.color = new Color(1f, 1f, 1f, 0);
 
             return State.INITIAL;
         }
@@ -123,7 +131,6 @@ public class GameController : MonoBehaviour
         if (GameModel.Instance.agreed)
         {
             sessionStart = GetUnixNow();
-            centerText.text = "";
             disclaimerTransform.transform.position = new Vector3(0f, -4.31f, 3.037f);
             handsUp.color = new Color(1f, 1f, 1f, 0);
             return State.SCENE;
@@ -139,13 +146,11 @@ public class GameController : MonoBehaviour
         if (!HasFace())
         {
             lostStart = GetUnixNow();
-            centerText.text = "???";
             return State.LOST_USER;
         }
 
         if (GetSessionLength() > MAX_SESSION_LENGTH)
         {
-            centerText.text = "Please leave.";
             return State.FINISHED;
         }
 
@@ -156,13 +161,17 @@ public class GameController : MonoBehaviour
     {
         if (HasFace())
         {
+            loading.color = new Color(1f, 1f, 1f, 0);
             return State.SCENE;
         }
 
         if (GetLostLength() > MAX_LOST_LENGTH)
         {
+            loading.color = new Color(1f, 1f, 1f, 0);
             return State.INITIAL;
         }
+
+        loading.color = new Color(1f, 1f, 1f, Mathf.PingPong(Time.time, 1));
 
         return State.LOST_USER;
     }
@@ -171,8 +180,11 @@ public class GameController : MonoBehaviour
     {
         if (!HasFace())
         {
+            leaving.color = new Color(1f, 1f, 1f, 0);
             return State.INITIAL;
         }
+
+        leaving.color = new Color(1f, 1f, 1f, Mathf.PingPong(Time.time, 1));
 
         return State.FINISHED;
     }

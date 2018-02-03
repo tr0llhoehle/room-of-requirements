@@ -32,7 +32,7 @@ function route(sequelize) {
     console.log('read image');
   });
   router.get('/', getImage);
-  router.put('/', setImage);
+  router.post('/', setImage);
   return router;
 }
 
