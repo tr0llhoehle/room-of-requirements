@@ -26,8 +26,17 @@ VideoClipImporter:
   sourceAudioSampleRate: 80bb0000
   targetSettings:
     0:
-      enableTranscoding: 0
-      codec: 0
+      enableTranscoding: 1
+      codec: 1
+      resizeFormat: 0
+      aspectRatio: 0
+      customWidth: 1920
+      customHeight: 1080
+      bitrateMode: 2
+      spatialQuality: 2
+    1:
+      enableTranscoding: 1
+      codec: 2
       resizeFormat: 0
       aspectRatio: 0
       customWidth: 1920
@@ -35,10 +44,10 @@ VideoClipImporter:
       bitrateMode: 2
       spatialQuality: 2
   output:
-    format: 3
+    format: 4
     settings:
-      enableTranscoding: 0
-      codec: 0
+      enableTranscoding: 1
+      codec: 2
       resizeFormat: 0
       aspectRatio: 0
       customWidth: 1920
@@ -50,9 +59,9 @@ VideoClipImporter:
     encodedStartFrame: 0
     encodedEndFrame: 2989
     streamedResource:
-      source: 
+      source: library/metadata/b9/b922b0998a49e43d1838d253b4e1f15f.resource
       offset: 0
-      size: 3043489
+      size: 6135504
   userData: 
   assetBundleName: 
   assetBundleVariant: 

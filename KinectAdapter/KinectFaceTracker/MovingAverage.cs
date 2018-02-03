@@ -9,8 +9,8 @@ namespace KinectFaceTracker
     public class MovingAverage
     {
         private List<FaceData> buffer = new List<FaceData>();
-        private int maxBuffer = 10;
-        private int stepsPerChange = 3;
+        private int maxBuffer = 3;
+        private int stepsPerChange = 1;
         private int step = 0;
 
         public event FaceChangedEventHandler FaceChanged;

@@ -21,10 +21,13 @@ public class GameController : MonoBehaviour
     private ulong lostStart = 0; // Unix timestamp
     private State state = State.INITIAL;
     private TextMesh centerText = null;
+    private Transform disclaimerTransform = null;
+
 
     private void Start()
     {
         centerText = GameObject.Find("CenterText").GetComponent<TextMesh>();
+        disclaimerTransform = GameObject.Find("DisclaimerText").GetComponent<Transform>();
     }
 
     private ulong GetUnixNow()
@@ -97,7 +100,11 @@ public class GameController : MonoBehaviour
     private State UpdateDisclaimer()
     {
         if (!HasFace())
+        {
+            disclaimerTransform.transform.position = new Vector3(0f, -4.31f, 3.037f);
+
             return State.INITIAL;
+        }
 
         if (HasGesture())
         {
@@ -113,10 +120,11 @@ public class GameController : MonoBehaviour
         {
             sessionStart = GetUnixNow();
             centerText.text = "";
+            disclaimerTransform.transform.position = new Vector3(0f, -4.31f, 3.037f);
             return State.SCENE;
         }
 
-        centerText.text = "Disclaimer:";
+        disclaimerTransform.Translate(Vector3.up * Time.deltaTime, Space.World);
         return State.DISCLAIMER;
     }
 

@@ -7,6 +7,7 @@ Shader "HorizontalBlendShader" {
    Properties {
       _DecalTex ("Top", 2D) = "white" {}
       _MainTex ("Base", 2D) = "white" {} 
+	  _Balance ("Balance", Float) = 1.0 
    }
    SubShader {
       Pass {	
@@ -24,6 +25,7 @@ Shader "HorizontalBlendShader" {
  
          uniform sampler2D _MainTex;
          uniform sampler2D _DecalTex;
+		 uniform float _Balance;
  
          struct vertexInput {
             float4 vertex : POSITION;
@@ -36,6 +38,7 @@ Shader "HorizontalBlendShader" {
             float levelOfLighting : TEXCOORD1;
                // level of diffuse lighting computed in vertex shader
          };
+
  
          vertexOutput vert(vertexInput input) 
          {
@@ -65,8 +68,8 @@ Shader "HorizontalBlendShader" {
                tex2D(_MainTex, baseCoord);    
             float4 topColor = 
                tex2D(_DecalTex, baseCoord);    
-            return lerp(baseColor, topColor, 
-               input.tex.x);
+			float alpha = min(1.0f, _Balance * input.tex.x);
+			return lerp(baseColor, topColor, alpha);
          }
  
          ENDCG

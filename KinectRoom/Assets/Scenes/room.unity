@@ -20,13 +20,13 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientSkyColor: {r: 1, g: 1, b: 1, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 1.63
-  m_AmbientMode: 0
+  m_AmbientIntensity: 1.87
+  m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -322,85 +322,197 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &651604745
+--- !u!1 &603340715
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 651604747}
-  - component: {fileID: 651604746}
+  - component: {fileID: 603340718}
+  - component: {fileID: 603340717}
+  - component: {fileID: 603340716}
   m_Layer: 0
-  m_Name: Directional light
+  m_Name: DisclaimerText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!108 &651604746
-Light:
+--- !u!102 &603340716
+TextMesh:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 651604745}
-  m_Enabled: 1
-  serializedVersion: 8
-  m_Type: 2
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 2
-  m_Range: 50
-  m_SpotAngle: 82
-  m_CookieSize: 10
-  m_Shadows:
-    m_Type: 0
-    m_Resolution: -1
-    m_CustomResolution: -1
-    m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
-  m_Cookie: {fileID: 0}
-  m_DrawHalo: 0
-  m_Flare: {fileID: 0}
-  m_RenderMode: 0
-  m_CullingMask:
+  m_GameObject: {fileID: 603340715}
+  m_Text: "Conditions of Use\r\n\r\nLast updated: May 25, 2017\r\n\r\nWelcome to the
+    Room of Requirements. Room of Requirements and/or its artists \r\n(\"RoR\") provide
+    video installation features and other products and services to \r\nyou when you
+    visit the Room of Requirements. RoR provides the room services \r\nsubject to
+    the following conditions.\r\nBy using RoR Services, you agree to these conditions.
+    Please read them \r\ncarefully.\r\n\r\nPRIVACY\r\nOn privacy please review our
+    Privacy Notice, that is appended to these \r\nConditions of Use.\r\n\r\nTRADEMARKS\r\nRoR's
+    trademarks may not be used in connection with any product or service that \r\nis
+    not RoR's, in any manner that is likely to cause confusion among customers, \r\nor
+    in any manner that disparages or discredits RoR. All other trademarks not \r\nowned
+    by RoR that appear in any RoR Service are the property of their \r\nrespective
+    owners, who may or may not be affiliated with, connected to, or \r\nsponsored
+    by RoR.\r\n\r\nPATENTS\r\nNone or more patents owned by RoR apply to the RoR Services
+    and to the features \r\nand services accessible via the RoR Services. Portions
+    of the RoR Services \r\noperate under license of none or more patents.\r\n\r\nLICENSE
+    AND ACCESS\r\nSubject to your compliance with these Conditions of Use and your
+    payment of any \r\napplicable fees, RoR or its content providers grant you a limited,
+    \r\nnon-exclusive, non-transferable, non-sublicensable license to access and make
+    \r\npersonal and non-commercial use of the RoR Services. This license does not
+    \r\ninclude any resale or commercial use of any RoR Service, or its contents;
+    use \r\nof any derivative of any RoR Service or its contents; any downloading,
+    copying, \r\nor other use of account information for the benefit of any third
+    party; or any \r\nuse of data mining, robots, or similar data gathering and extraction
+    tools. All \r\nrights not expressly granted to you in these Conditions of Use
+    or any Service \r\nTerms are reserved and retained by RoR or its licensors, suppliers,
+    publishers, \r\nrightsholders, or other content providers. No RoR Service, nor
+    any part of any \r\nRoR Service, may be reproduced, duplicated, copied, sold,
+    resold, visited, or \r\notherwise exploited for any commercial purpose without
+    express written consent \r\nof RoR. Any RoR Service, and any part of any RoR Service,
+    may measure objective \r\nvisitors' body parameters, observe and analyze visitors
+    or otherwise exploit \r\nvisitors for any artistic purpose without express written
+    consent of visitor. \r\nYou may not frame or utilize framing techniques to enclose
+    any trademark, logo, \r\nor other proprietary information (including images, text,
+    page layout, or form) \r\nof RoR without express written consent. You may not
+    use any meta tags or any \r\nother \"hidden text\" utilizing RoR's name or trademarks
+    without the express \r\nwritten consent of RoR. You may not misuse the RoR Services.
+    You may use the \r\nRoR Services only as permitted by law. The licenses granted
+    by RoR terminate if \r\nyou do not comply with these Conditions of Use or any
+    Service Terms.\r\n\r\nCOPYRIGHT COMPLAINTS\r\nRoR respects the intellectual property
+    of others. If you believe that your work \r\nhas been copied in a way that constitutes
+    copyright infringement, please follow \r\nour Notice and Procedure for Making
+    Claims of Copyright Infringement.\r\n\r\nDISCLAIMER OF WARRANTIES AND LIMITATION
+    OF LIABILITY\r\nTHE ROR SERVICES AND ALL INFORMATION, CONTENT, MATERIALS, PRODUCTS
+    (INCLUDING \r\nSOFTWARE) AND OTHER SERVICES INCLUDED ON OR OTHERWISE MADE AVAILABLE
+    TO YOU \r\nTHROUGH THE ROR SERVICES ARE PROVIDED BY ROR ON AN \"AS IS\" AND \"AS
+    AVAILABLE\" \r\nBASIS, UNLESS OTHERWISE SPECIFIED IN WRITING. ROR MAKES NO REPRESENTATIONS
+    OR \r\nWARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, AS TO THE OPERATION OF THE
+    ROR \r\nSERVICES, OR THE INFORMATION, CONTENT, MATERIALS, PRODUCTS (INCLUDING
+    SOFTWARE) \r\nOR OTHER SERVICES INCLUDED ON OR OTHERWISE MADE AVAILABLE TO YOU
+    THROUGH THE \r\nROR SERVICES, UNLESS OTHERWISE SPECIFIED IN WRITING. YOU EXPRESSLY
+    AGREE THAT \r\nYOUR USE OF THE ROR SERVICES IS AT YOUR SOLE RISK.\r\n\r\nTO THE
+    FULL EXTENT PERMISSIBLE BY APPLICABLE LAW, ROR DISCLAIMS ALL WARRANTIES, \r\nEXPRESS
+    OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF \r\nMERCHANTABILITY
+    AND FITNESS FOR A PARTICULAR PURPOSE. ROR DOES NOT WARRANT THAT \r\nTHE ROR SERVICES,
+    INFORMATION, CONTENT, MATERIALS, PRODUCTS (INCLUDING \r\nSOFTWARE) OR OTHER SERVICES
+    INCLUDED ON OR OTHERWISE MADE AVAILABLE TO YOU \r\nTHROUGH THE ROR SERVICES ARE
+    FREE OF VIRUSES OR OTHER HARMFUL COMPONENTS. ROR \r\nWILL NOT BE LIABLE FOR ANY
+    DAMAGES OF ANY KIND ARISING FROM THE USE OF ANY ROR \r\nSERVICE, OR FROM ANY INFORMATION,
+    CONTENT, MATERIALS, PRODUCTS (INCLUDING \r\nSOFTWARE) OR OTHER SERVICES INCLUDED
+    ON OR OTHERWISE MADE AVAILABLE TO YOU \r\nTHROUGH ANY ROR SERVICE, INCLUDING,
+    BUT NOT LIMITED TO DIRECT, INDIRECT, \r\nINCIDENTAL, PUNITIVE, AND CONSEQUENTIAL
+    DAMAGES, UNLESS OTHERWISE SPECIFIED IN \r\nWRITING.\r\n\r\nCERTAIN STATE LAWS
+    DO NOT ALLOW LIMITATIONS ON IMPLIED WARRANTIES OR THE \r\nEXCLUSION OR LIMITATION
+    OF CERTAIN DAMAGES. IF THESE LAWS APPLY TO YOU, SOME OR \r\nALL OF THE ABOVE DISCLAIMERS,
+    EXCLUSIONS, OR LIMITATIONS MAY NOT APPLY TO YOU, \r\nAND YOU MIGHT HAVE ADDITIONAL
+    RIGHTS.\r\nDISPUTES\r\n\r\nAny dispute or claim relating in any way to your use
+    of any RoR Service, or to \r\nany services distributed by RoR will be resolved
+    by binding arbitration, rather \r\nthan in court, except that you may assert claims
+    in small claims court if your \r\nclaims qualify.\r\n\r\nThere is no judge or
+    jury in arbitration, and court review of an arbitration \r\naward is limited.
+    However, an arbitrator can award on an individual basis the \r\nsame damages and
+    relief as a court (including injunctive and declaratory relief \r\nor statutory
+    damages), and must follow the terms of these Conditions of Use as \r\na court
+    would.\r\n\r\nSITE POLICIES, MODIFICATION, AND SEVERABILITY\r\nPlease review our
+    other policies, such as our pricing policy, posted on this \r\nsite. These policies
+    also govern your use of RoR Services. We reserve the right \r\nto make changes
+    to our site, policies, Service Terms, and these Conditions of \r\nUse at any time.
+    If any of these conditions shall be deemed invalid, void, or \r\nfor any reason
+    unenforceable, that condition shall be deemed severable and \r\nshall not affect
+    the validity and enforceability of any remaining condition.\r\n\r\nOUR ADDRESS\r\nThe
+    only way to reach us, is via our mail address:\r\nroom-of-requirements@gmx.de\r\nIf
+    you believe that your work has been copied in a way that constitutes \r\ncopyright
+    infringement, please submit your complaint using our online form. We \r\nmay respond
+    quickly to the concerns of rights owners about any alleged \r\ninfringement.\r\n\r\nAdditional
+    RoR Software Terms\r\n    Use of the RoR Software. You may use RoR Software solely
+    for purposes of \r\nenabling you to use and enjoy the RoR Services as provided
+    by RoR, and as \r\npermitted by the Conditions of Use, these Software Terms and
+    any Service Terms. \r\nYou may not incorporate any portion of the RoR Software
+    into your own programs \r\nor compile any portion of it in combination with your
+    own programs, transfer it \r\nfor use with another service, or sell, rent, lease,
+    lend, loan, distribute or \r\nsub-license the RoR Software or otherwise assign
+    any rights to the RoR Software \r\nin whole or in part. You may not use the RoR
+    Software for any illegal purpose. \r\nWe may cease providing any RoR Software
+    and we may terminate your right to use \r\nany RoR Software at any time. Your
+    rights to use the RoR Software will \r\nautomatically terminate without notice
+    from us if you fail to comply with any \r\nof these Software Terms, the Conditions
+    of Use or any other Service Terms. \r\nAdditional third party terms contained
+    within or distributed with certain RoR \r\nSoftware that are specifically identified
+    in related documentation may apply to \r\nthat RoR Software (or software incorporated
+    with the RoR Software) and will \r\ngovern the use of such software in the event
+    of a conflict with these \r\nConditions of Use. All software used in any RoR Service
+    is the property of RoR \r\nor its software suppliers and protected by German and
+    international copyright \r\nlaws.\r\n    No Reverse Engineering. You may not,
+    and you will not encourage, assist or \r\nauthorize any other person to copy,
+    modify, reverse engineer, decompile or \r\ndisassemble, or otherwise tamper with,
+    the RoR Software, whether in whole or in \r\npart, or create any derivative works
+    from or of the RoR Software.\r\n    Updates. In order to keep the RoR Software
+    up-to-date, we may offer \r\nautomatic or manual updates at any time and without
+    notice to you.\r\n\r\nPRIVACY NOTICE\r\nThere is no privacy in RoR."
+  m_OffsetZ: 0
+  m_CharacterSize: 0.02
+  m_LineSpacing: 1
+  m_Anchor: 4
+  m_Alignment: 0
+  m_TabSize: 4
+  m_FontSize: 25
+  m_FontStyle: 0
+  m_RichText: 1
+  m_Font: {fileID: 0}
+  m_Color:
     serializedVersion: 2
-    m_Bits: 4294967295
-  m_Lightmapping: 2
-  m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
-  m_FalloffTable:
-    m_Table[0]: 0
-    m_Table[1]: 0
-    m_Table[2]: 0
-    m_Table[3]: 0
-    m_Table[4]: 0
-    m_Table[5]: 0
-    m_Table[6]: 0
-    m_Table[7]: 0
-    m_Table[8]: 0
-    m_Table[9]: 0
-    m_Table[10]: 0
-    m_Table[11]: 0
-    m_Table[12]: 0
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
-  m_ShadowRadius: 0
-  m_ShadowAngle: 0
---- !u!4 &651604747
+    rgba: 4294967295
+--- !u!23 &603340717
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 603340715}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!4 &603340718
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 651604745}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.07, y: 3.76, z: -0.63}
+  m_GameObject: {fileID: 603340715}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -4.13, z: 3.037}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &904957529
 GameObject:
   m_ObjectHideFlags: 0
@@ -520,14 +632,12 @@ VideoPlayer:
   m_DataSource: 0
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 0
-  m_TargetAudioSources:
-  - {fileID: 0}
-  m_DirectAudioVolumes:
-  - 1
+  m_TargetAudioSources: []
+  m_DirectAudioVolumes: []
   m_Url: 
-  m_EnabledAudioTracks: 01
-  m_DirectAudioMutes: 00
-  m_ControlledAudioTrackCount: 1
+  m_EnabledAudioTracks: 
+  m_DirectAudioMutes: 
+  m_ControlledAudioTrackCount: 0
   m_PlayOnAwake: 1
   m_SkipOnDrop: 1
   m_Looping: 1
@@ -828,7 +938,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1412736337
 MonoBehaviour:
@@ -1200,14 +1310,12 @@ VideoPlayer:
   m_DataSource: 0
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 0
-  m_TargetAudioSources:
-  - {fileID: 0}
-  m_DirectAudioVolumes:
-  - 1
+  m_TargetAudioSources: []
+  m_DirectAudioVolumes: []
   m_Url: 
-  m_EnabledAudioTracks: 01
-  m_DirectAudioMutes: 00
-  m_ControlledAudioTrackCount: 1
+  m_EnabledAudioTracks: 
+  m_DirectAudioMutes: 
+  m_ControlledAudioTrackCount: 0
   m_PlayOnAwake: 1
   m_SkipOnDrop: 1
   m_Looping: 0
@@ -1332,6 +1440,7 @@ GameObject:
   - component: {fileID: 1812707047}
   - component: {fileID: 1812707046}
   - component: {fileID: 1812707045}
+  - component: {fileID: 1812707049}
   m_Layer: 0
   m_Name: Front Wall
   m_TagString: Untagged
@@ -1405,6 +1514,17 @@ Transform:
   m_Father: {fileID: 939497021}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 180}
+--- !u!114 &1812707049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1812707044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a961575e0436c4a4b82d3e39198700a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1905510257
 GameObject:
   m_ObjectHideFlags: 0
@@ -1515,12 +1635,12 @@ TextMesh:
   m_GameObject: {fileID: 2130943374}
   m_Text: 
   m_OffsetZ: 0
-  m_CharacterSize: 0.1
+  m_CharacterSize: 0.05
   m_LineSpacing: 1
   m_Anchor: 4
   m_Alignment: 0
   m_TabSize: 4
-  m_FontSize: 120
+  m_FontSize: 240
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 0}
@@ -1570,5 +1690,5 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
