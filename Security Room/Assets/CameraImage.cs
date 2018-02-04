@@ -12,7 +12,7 @@ public class CameraImage : MonoBehaviour {
 		raw_img = GetComponent<RawImage> ();
 		tex = new Texture2D (1, 2, TextureFormat.DXT1, false);
 
-		StartCoroutine (update_and_redraw ());
+		// StartCoroutine (update_and_redraw ());
 	}
 
 	IEnumerator update_and_redraw() {
