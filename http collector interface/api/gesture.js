@@ -23,7 +23,7 @@ function setState(req, res) {
   res.sendStatus(200);
 }
 
-function route(sequelize) {
+function route() {
   var jsonParser = bodyParser.json();
   router.get('/', getState);
   router.post('/', jsonParser, setState);

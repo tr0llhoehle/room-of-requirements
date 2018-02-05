@@ -12,11 +12,12 @@ namespace KinectFaceTracker
     using System.Windows;
     using System.Drawing;
     using System.Drawing.Imaging;
+    using System.Windows.Forms;
 
     public delegate void FaceChangedEventHandler(object sender, FaceData e);
     public delegate void GestureChangedEventHandler(object sender, GestureData e);
-    public delegate void ColorImageEventHandler(object sender, Bitmap e);
-    public delegate void DepthFrameEventHandler(object sender, Bitmap e);
+    public delegate void ColorImageEventHandler(object sender, ImageData e);
+    public delegate void DepthFrameEventHandler(object sender, ImageData e);
 
     public class Kinect
     {
@@ -89,6 +90,8 @@ namespace KinectFaceTracker
         /// </summary>
         private Rect displayRect;
 
+        public DebugWindow debugWindow;
+
         /// <summary>
         /// Initializes a new instance of the MainWindow class.
         /// </summary>
@@ -111,8 +114,9 @@ namespace KinectFaceTracker
             this.colorFrameReader = this.kinectSensor.ColorFrameSource.OpenReader();
             this.colorFrameReader.FrameArrived += this.Reader_ColorFrameArrived;
 
-            this.depthFrameReader = this.kinectSensor.DepthFrameSource.OpenReader();
-            this.depthFrameReader.FrameArrived += this.Reader_DepthFrameArrived;
+            // FIXME Does not work
+            //this.depthFrameReader = this.kinectSensor.DepthFrameSource.OpenReader();
+            //this.depthFrameReader.FrameArrived += this.Reader_DepthFrameArrived;
 
             // open the reader for the body frames
             this.bodyFrameReader = this.kinectSensor.BodyFrameSource.OpenReader();
@@ -126,6 +130,10 @@ namespace KinectFaceTracker
             // allocate storage to store body objects
             this.bodies = new Body[this.bodyCount];
             this.gestureTrackers = new GestureRecognition[this.bodyCount];
+
+            this.debugWindow = new DebugWindow();
+            this.debugWindow.Size = new System.Drawing.Size(800, 600);
+            this.debugWindow.Show();
 
             // specify the required face frame results
             FaceFrameFeatures faceFrameFeatures =
@@ -193,12 +201,12 @@ namespace KinectFaceTracker
             roll = (int)(Math.Floor((rollD + ((increment / 2.0) * (rollD > 0 ? 1.0 : -1.0))) / increment) * increment);
         }
 
-        protected virtual void OnColorImageChanged(Bitmap e)
+        protected virtual void OnColorImageChanged(ImageData e)
         {
             ColorImageChanged.Invoke(this, e);
         }
 
-        protected virtual void OnDepthImageChanged(Bitmap e)
+        protected virtual void OnDepthImageChanged(ImageData e)
         {
             DepthImageChanged.Invoke(this, e);
         }
@@ -268,6 +276,16 @@ namespace KinectFaceTracker
             }
         }
 
+        public Bitmap CropImage(Bitmap source, Rectangle section)
+        {
+            Bitmap target = new Bitmap(section.Width, section.Height, source.PixelFormat);
+
+            Graphics g = Graphics.FromImage(target);
+            g.DrawImage(source, 0, 0, section, GraphicsUnit.Pixel);
+
+            return target;
+        }
+
         private void Reader_ColorFrameArrived(object sender, ColorFrameArrivedEventArgs e)
         {
             for (int i = 0; i < this.bodyCount; i++)
@@ -275,33 +293,57 @@ namespace KinectFaceTracker
                 if (this.faceFrameSources[i].IsTrackingIdValid && this.faceFrameResults[i] != null)
                 {
                     ColorFrame frame = e.FrameReference.AcquireFrame();
-                    byte[] frameData = new byte[this.displayHeight * this.displayWidth * 4];
-                    frame.CopyConvertedFrameDataToArray(frameData, ColorImageFormat.Rgba);
 
-                    Bitmap mp = new Bitmap(this.displayWidth, this.displayHeight, PixelFormat.Format32bppRgb);
-                    OnColorImageChanged(mp);
-                    break;
-                }
-            }
-        }
+                    using (frame)
+                    {
+                        Bitmap outputImage = null;
+                        System.Drawing.Imaging.BitmapData imageData = null;
+                        // Next get the frame's description and create an output bitmap image.
+                        FrameDescription description = frame.FrameDescription;
+                        outputImage = new Bitmap(description.Width, description.Height, PixelFormat.Format32bppArgb);
 
-        private void     Reader_DepthFrameArrived(object sender, DepthFrameArrivedEventArgs e)
-        {
-            for (int i = 0; i < this.bodyCount; i++)
-            {
-                if (this.faceFrameSources[i].IsTrackingIdValid && this.faceFrameResults[i] != null)
-                {
-                    int height = depthFrameReader.DepthFrameSource.FrameDescription.Height;
-                    int width = depthFrameReader.DepthFrameSource.FrameDescription.Width;
+                        // Next, we create the raw data pointer for the bitmap, as well as the size of the image's data.
+                        imageData = outputImage.LockBits(new Rectangle(0, 0, outputImage.Width, outputImage.Height),
+                            ImageLockMode.WriteOnly, outputImage.PixelFormat);
+                        IntPtr imageDataPtr = imageData.Scan0;
+                        int size = imageData.Stride * outputImage.Height;
 
-                    DepthFrame frame = e.FrameReference.AcquireFrame();
-                    ushort[] frameData = new ushort[height * width];
-                    frame.CopyFrameDataToArray(frameData);
+                        using (frame)
+                        {
+                            // After this, we copy the image data directly to the buffer.  Note that while this is in BGRA format, it will be flipped due
+                            // to the endianness of the data.
+                            if (frame.RawColorImageFormat == ColorImageFormat.Bgra)
+                            {
+                                frame.CopyRawFrameDataToIntPtr(imageDataPtr, (uint)size);
+                            }
+                            else
+                            {
+                                frame.CopyConvertedFrameDataToIntPtr(imageDataPtr, (uint)size, ColorImageFormat.Bgra);
+                            }
+                        }
+                        // Finally, unlock the output image's raw data again and create a new bitmap for the preview picture box.
+                        outputImage.UnlockBits(imageData);
 
-                    Bitmap mp = new Bitmap(this.displayWidth, this.displayHeight, PixelFormat.Format16bppGrayScale);
+                        var rect = this.faceFrameResults[i].FaceBoundingBoxInColorSpace;
+                        Rectangle bbox = new Rectangle(Math.Max(0, rect.Left - 30), Math.Max(0, rect.Top-30),
+                                                       Math.Min(rect.Right - rect.Left + 30, outputImage.Width),
+                                                       Math.Min(rect.Bottom - rect.Top + 30, outputImage.Height));
+                        Bitmap cropped = CropImage(outputImage, bbox);
 
-                    OnDepthImageChanged(mp);
-                    break;
+                        if (this.debugWindow != null)
+                        {
+                            this.debugWindow.UpdateFrame(cropped);
+                        }
+
+                        ImageData data = new ImageData();
+                        data.image = cropped;
+                        data.id = this.faceFrameResults[i].TrackingId;
+                        data.time = (ulong)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
+                
+                        OnColorImageChanged(data);
+                
+                        break;
+                    }
                 }
             }
         }

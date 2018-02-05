@@ -22,16 +22,16 @@ namespace KinectHTTPProxy
         {
             faceServer = new Uri(baseURL + "/face");
             gestureServer = new Uri(baseURL + "/gesture");
-            colorServer = new Uri(baseURL + "/current_image");
-            depthServer = new Uri(baseURL + "/depth");
+            colorServer = new Uri(baseURL + "/current_image?id={0}&time={1}");
+            depthServer = new Uri(baseURL + "/depth?id={0}&time={1}");
         }
 
-        private void SendImage(Bitmap bm, Uri url)
+        private void SendImage(ImageData bm, Uri url)
         {
             byte[] result;
             using (System.IO.MemoryStream stream = new System.IO.MemoryStream())
             {
-                if (bm.PixelFormat == PixelFormat.Format16bppGrayScale)
+                if (bm.image.PixelFormat == PixelFormat.Format16bppGrayScale)
                 {
                     // FIXME: gray scale conversion does not work
                     return;
@@ -49,13 +49,12 @@ namespace KinectHTTPProxy
                     */
                 }
 
-                bm.Save(stream, ImageFormat.Png);
+                bm.image.Save(stream, ImageFormat.Png);
 
                 result = stream.ToArray();
             }
 
-            Console.WriteLine(String.Format("PNG {0} bytes", result.Length) + "->" + url.ToString());
-
+            url = new Uri(string.Format(url.ToString(), bm.id, bm.time));
 
             using (WebClient wc = new WebClient())
             {
@@ -66,8 +65,6 @@ namespace KinectHTTPProxy
 
         private void SendData(String json, Uri url)
         {
-            //Console.WriteLine(json + "->" + url.ToString());
-
             using (WebClient wc = new WebClient())
             {
                 wc.Headers[HttpRequestHeader.ContentType] = "application/json";
@@ -75,12 +72,12 @@ namespace KinectHTTPProxy
             }
         }
 
-        public void SendDepthImage(Bitmap bm)
+        public void SendDepthImage(ImageData bm)
         {
             SendImage(bm, depthServer);
         }
 
-        public void SendColorImage(Bitmap bm)
+        public void SendColorImage(ImageData bm)
         {
             SendImage(bm, colorServer);
         }
