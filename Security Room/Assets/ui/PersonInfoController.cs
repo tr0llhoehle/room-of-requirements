@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PersonInfoUpdater : MonoBehaviour {
+public class PersonInfoController : MonoBehaviour {
 	public Text subjectId;
 	public Text age;
 	public Text gender;
@@ -11,7 +11,7 @@ public class PersonInfoUpdater : MonoBehaviour {
 	public Text weight;
 	// Use this for initialization
 	void Start () {
-		StartCoroutine(updateBars());
+		// StartCoroutine(updateBars());
 	}
 
 	IEnumerator updateBars() {

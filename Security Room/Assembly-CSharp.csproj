@@ -53,10 +53,16 @@
   <ItemGroup>
      <Compile Include="Assets\CameraImage.cs" />
      <Compile Include="Assets\ClockAnimator.cs" />
-     <Compile Include="Assets\PersonalityBar.cs" />
+     <Compile Include="Assets\dummy.data\Dummy.cs" />
+     <Compile Include="Assets\personality.analyzer\AdditionalColorTraits.cs" />
+     <Compile Include="Assets\personality.analyzer\ColorPersonality.cs" />
+     <Compile Include="Assets\personality.analyzer\GeneralizedPersonality.cs" />
+     <Compile Include="Assets\personality.analyzer\ProContraColorTraits.cs" />
      <Compile Include="Assets\PersonalityInfo.cs" />
      <Compile Include="Assets\PersonInfo.cs" />
-     <Compile Include="Assets\PersonInfoUpdater.cs" />
+     <Compile Include="Assets\ui\AdditionalTraitController.cs" />
+     <Compile Include="Assets\ui\PersonalityBar.cs" />
+     <Compile Include="Assets\ui\PersonInfoController.cs" />
      <Compile Include="Assets\Utility.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Software/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
