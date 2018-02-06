@@ -11,6 +11,7 @@ public class PersonalityBar : MonoBehaviour {
 	public GameObject agreeBar;
 	public GameObject extrovBar;
 
+	private string currentSubjectId = "";
 	// Use this for initialization
 	void Start() {
 		if (Dummy.ENABLED) {
@@ -23,13 +24,13 @@ public class PersonalityBar : MonoBehaviour {
 
 	IEnumerator updateBars() {
 		while (true) {
-			WWW www = new WWW(Utility.PERSONALITY_URL);
+			WWW www = new WWW(Utility.SUBJECT_URL);
 			yield return www;
 			if (www.error == null) {
 				string jsonString = www.text;
 				setAllBars(GeneralizedPersonality.createFromJsonString(jsonString));
 			} else {
-				print("personality url not reachable: " + Utility.PERSONALITY_URL);
+				print("personality url not reachable: " + Utility.SUBJECT_URL);
 			}
 
 			yield return new WaitForSeconds(Utility.UPDATE_INTERVAL);
@@ -37,6 +38,9 @@ public class PersonalityBar : MonoBehaviour {
 	}
 
 	private void setAllBars(GeneralizedPersonality personalityInfo) {
+		if (!currentSubjectId.Equals(SharedInfo.subjectId)) {
+			currentSubjectId = SharedInfo.subjectId;
+		}
 		setScaleInPercent(neuroBar, personalityInfo.neuroticism);
 		setScaleInPercent(openBar, personalityInfo.openness);
 		setScaleInPercent(conscBar, personalityInfo.conscientiousness);

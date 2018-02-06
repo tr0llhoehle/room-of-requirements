@@ -9,25 +9,25 @@ public class PersonInfoController : MonoBehaviour {
 	public Text gender;
 	public Text height;
 	public Text weight;
-	// Use this for initialization
+
+	private string currentSubjectId  = "";
 	void Start() {
 		if (Dummy.ENABLED) {
 			setPersonInfo(Dummy.getDummyPersonInfo());
 		} else {
 			StartCoroutine(updateBars());
-
 		}
 	}
 
 	IEnumerator updateBars() {
 		while (true) {
-			WWW www = new WWW(Utility.GENERAL_INFO_URL);
+			WWW www = new WWW(Utility.SUBJECT_URL);
 			yield return www;
 			if (www.error == null) {
 				string jsonString = www.text;
 				setPersonInfo(PersonInfo.createFromJsonString(jsonString));
 			} else {
-				print("general info url not reachable: " + Utility.GENERAL_INFO_URL);
+				print("general info url not reachable: " + Utility.SUBJECT_URL);
 			}
 
 			yield return new WaitForSeconds(Utility.UPDATE_INTERVAL);
@@ -35,11 +35,15 @@ public class PersonInfoController : MonoBehaviour {
 	}
 
 	private void setPersonInfo(PersonInfo personInfo) {
-		subjectId.text = personInfo.id;
-		age.text = personInfo.age;
-		gender.text = personInfo.gender;
-		height.text = personInfo.height;
-		weight.text = personInfo.weight;
+		SharedInfo.subjectId = personInfo.id;
+		if (!currentSubjectId.Equals(SharedInfo.subjectId)) {
+			currentSubjectId = SharedInfo.subjectId;
+			subjectId.text = currentSubjectId;
+			age.text = personInfo.age;
+			gender.text = personInfo.gender;
+			height.text = personInfo.height;
+			weight.text = personInfo.weight;
+		}
 	}
 
 }
