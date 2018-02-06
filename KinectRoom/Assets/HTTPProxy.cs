@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class HTTPProxy : MonoBehaviour {
     public string url = "http://127.0.0.1:3000";
-    public float updateSeconds = 0.01f;
+    public float updateSeconds = 0.05f;
 
     private string faceUrl;
     private string gestureUrl;

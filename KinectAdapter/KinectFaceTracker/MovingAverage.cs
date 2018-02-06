@@ -9,9 +9,9 @@ namespace KinectFaceTracker
     public class MovingAverage
     {
         private List<FaceData> buffer = new List<FaceData>();
-        private int maxBuffer = 3;
-        private int stepsPerChange = 1;
-        private int step = 0;
+        private int maxBuffer = 10;
+        private ulong updatePeriode = 50;
+        private ulong lastUpdate = 0;
 
         public event FaceChangedEventHandler FaceChanged;
 
@@ -46,11 +46,12 @@ namespace KinectFaceTracker
             newEstimation.pitch /= buffer.Count;
             newEstimation.yaw /= buffer.Count;
 
-            step++;
-            if (step == stepsPerChange)
+            if (faceData.time - lastUpdate > updatePeriode)
             {
+                Console.WriteLine(String.Format("face: {0} ms", faceData.time - lastUpdate));
+
                 FaceChanged(this, newEstimation);
-                step = 0;
+                lastUpdate = faceData.time;
             }
         }
     }

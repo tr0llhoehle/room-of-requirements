@@ -20,24 +20,37 @@ public class GameController : MonoBehaviour
     private ulong sessionStart = 0; // Unix timestamp
     private ulong lostStart = 0; // Unix timestamp
     private State state = State.INITIAL;
-    private TextMesh centerText = null;
     private Transform disclaimerTransform = null;
     private SpriteRenderer handsUp = null;
     private SpriteRenderer leaving = null;
     private SpriteRenderer loading = null;
+    private SpriteRenderer standing = null;
+
+
+    private void HideSprite(SpriteRenderer sprite)
+    {
+        sprite.color = new Color(1f, 1f, 1f, 0);
+    }
+
+    private void BlinkSprite(SpriteRenderer sprite)
+    {
+        sprite.color = new Color(1f, 1f, 1f, Mathf.PingPong(Time.time, 1));
+    }
+
+
 
     private void Start()
     {
-        centerText = GameObject.Find("CenterText").GetComponent<TextMesh>();
         disclaimerTransform = GameObject.Find("DisclaimerText").GetComponent<Transform>();
         handsUp = GameObject.Find("HandsUp").GetComponent<SpriteRenderer>();
         leaving = GameObject.Find("Leaving").GetComponent<SpriteRenderer>();
         loading = GameObject.Find("Loading").GetComponent<SpriteRenderer>();
+        standing = GameObject.Find("Standing").GetComponent<SpriteRenderer>();
 
-        handsUp.color = new Color(1f, 1f, 1f, 0);
-        leaving.color = new Color(1f, 1f, 1f, 0);
-        loading.color = new Color(1f, 1f, 1f, 0);
-
+        HideSprite(handsUp);
+        HideSprite(leaving);
+        HideSprite(loading);
+        HideSprite(standing);
     }
 
     private ulong GetUnixNow()
@@ -97,12 +110,12 @@ public class GameController : MonoBehaviour
 
     private State UpdateInitial()
     {
-        loading.color = new Color(1f, 1f, 1f, Mathf.PingPong(Time.time, 1));
+        BlinkSprite(standing);
 
         if (HasFace())
         {
             GameModel.Instance.agreed = false;
-            loading.color = new Color(1f, 1f, 1f, 0);
+            HideSprite(standing);
             return State.DISCLAIMER;
         }
         return State.INITIAL;
@@ -113,7 +126,7 @@ public class GameController : MonoBehaviour
         if (!HasFace())
         {
             disclaimerTransform.transform.position = new Vector3(0f, -4.31f, 3.037f);
-            handsUp.color = new Color(1f, 1f, 1f, 0);
+            HideSprite(handsUp);
 
             return State.INITIAL;
         }
@@ -132,12 +145,12 @@ public class GameController : MonoBehaviour
         {
             sessionStart = GetUnixNow();
             disclaimerTransform.transform.position = new Vector3(0f, -4.31f, 3.037f);
-            handsUp.color = new Color(1f, 1f, 1f, 0);
+            HideSprite(handsUp);
             return State.SCENE;
         }
 
         disclaimerTransform.Translate(Vector3.up * Time.deltaTime * 2, Space.World);
-        handsUp.color = new Color(1f, 1f, 1f, Mathf.PingPong(Time.time, 1));
+        BlinkSprite(handsUp);
         return State.DISCLAIMER;
     }
 
@@ -161,17 +174,17 @@ public class GameController : MonoBehaviour
     {
         if (HasFace())
         {
-            loading.color = new Color(1f, 1f, 1f, 0);
+            HideSprite(loading);
             return State.SCENE;
         }
 
         if (GetLostLength() > MAX_LOST_LENGTH)
         {
-            loading.color = new Color(1f, 1f, 1f, 0);
+            HideSprite(loading);
             return State.INITIAL;
         }
 
-        loading.color = new Color(1f, 1f, 1f, Mathf.PingPong(Time.time, 1));
+        BlinkSprite(loading);
 
         return State.LOST_USER;
     }
@@ -180,11 +193,11 @@ public class GameController : MonoBehaviour
     {
         if (!HasFace())
         {
-            leaving.color = new Color(1f, 1f, 1f, 0);
+            HideSprite(leaving);
             return State.INITIAL;
         }
 
-        leaving.color = new Color(1f, 1f, 1f, Mathf.PingPong(Time.time, 1));
+        BlinkSprite(leaving);
 
         return State.FINISHED;
     }
