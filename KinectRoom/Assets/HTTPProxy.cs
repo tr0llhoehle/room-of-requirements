@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Video;
 
 
 
@@ -10,11 +11,17 @@ public class HTTPProxy : MonoBehaviour {
 
     private string faceUrl;
     private string gestureUrl;
+    private string colorUrl;
+
+    private VideoPlayer cold_player;
+    private VideoPlayer warm_player;
+
 
     HTTPProxy()
     {
         faceUrl = url + "/face";
         gestureUrl = url + "/gesture";
+        colorUrl = url + "/colors";
     }
 
     private IEnumerator updater;
@@ -46,12 +53,30 @@ public class HTTPProxy : MonoBehaviour {
                 GameModel.Instance.gestureData = gestureData;
             }
 
+            if (GameModel.Instance.faceData != null)
+            {
+                var postHeader = new Dictionary<string, string>();
+                postHeader.Add("Content-Type", "application/json");
+
+                // FIXME check if this is inverted
+                var wall = GameModel.Instance.faceData.yaw > 0 ? "warm" : "cold";
+                var time = GameModel.Instance.faceData.yaw > 0 ? warm_player.time : cold_player.time;
+                var jsonData = string.Format("{{\"time\": {0}, \"wall\": \"{1}\" }}", time, wall);
+                var raw_data = System.Text.Encoding.UTF8.GetBytes(jsonData);
+
+                www = new WWW(colorUrl, raw_data, postHeader);
+                yield return www;
+            }
+
             yield return new WaitForSeconds(updateSeconds);
         }
     }
 
     // Use this for initialization
     void Start () {
+        cold_player = GameObject.Find("ColdPlayer").GetComponent<VideoPlayer>();
+        warm_player = GameObject.Find("CatPlayer").GetComponent<VideoPlayer>();
+
         updater = UpdateState();
         StartCoroutine(updater);
     }

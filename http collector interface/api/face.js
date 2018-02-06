@@ -23,7 +23,7 @@ function setState(req, res) {
   res.sendStatus(200);
 }
 
-function route() {
+function route(external_state) {
   var jsonParser = bodyParser.json();
   router.get('/', getState);
   router.post('/', jsonParser, setState);

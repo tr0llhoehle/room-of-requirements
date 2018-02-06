@@ -1,5 +1,3 @@
-var express = require('express');
-var router = express.Router();
 var fs = require('fs');
 var csv = require('csv');
 
@@ -73,11 +71,7 @@ function getAdditionalTraits(wall) {
   return additional_traits;
 }
 
-function getAnalysis(req, res) {
-  console.log('data: ');
-  var data = JSON.parse(req.query.data);
-  console.log(data);
-
+function get(data) {
   var count = 0;
   var color_traits = []
   var additional_traits = [];
@@ -85,9 +79,7 @@ function getAnalysis(req, res) {
   for (var i = 0; i < data.length; i++) {
     var color = data[i][0];
     var percentage = data[i][1];
-    console.log(color);
     var association = getColdWarmBoth(color);
-    console.log(association);
     var procontra = {};
     procontra.pro = association[1];
     procontra.contra = association[2];
@@ -117,31 +109,10 @@ function getAnalysis(req, res) {
   analysis.color_traits = color_traits;
   analysis.additional_traits = additional_traits;
 
-  res.writeHead(200, {'Content-Type': 'application/json'});
-  res.end(JSON.stringify(analysis));
-
-  /*console.log("cold:");
-  for (var i = 1; i < traits_cold_colors.length; i++) {
-    console.log(traits_cold_colors[i]);
-  }
-  console.log("warm:");
-  for (var i = 1; i < traits_warm_colors.length; i++) {
-    console.log(traits_warm_colors[i]);
-  }*/
-
-  /*console.log('wall: '+ req.query.wall + 'time: ' + req.query.time);
-  var colors = [];
-  if (req.query.wall == "cold") {
-    colors = getColorNames(req.query.time, cold_wall);
-  } else if (req.query.wall == "warm") {
-    colors = getColorNames(req.query.time, warm_wall);
-  }
-  res.writeHead(200, {'Content-Type': 'application/json'});
-  res.end(JSON.stringify(colors)); // Send the colors*/
+  return analysis;
 }
 
-
-function route(sequelize) {
+function analysis() {
   fs.readFile('./traits_cold_colors.csv', function(err, data) {
     if (err) {
       console.log("Could not read traits_cold_colors.csv file, make sure it exists");
@@ -197,8 +168,8 @@ function route(sequelize) {
 
     console.log('read traits_warm.csv file');
   });
-  router.get('/', getAnalysis);
-  return router;
+
+  return get;
 }
 
-module.exports = route;
+module.exports = analysis;

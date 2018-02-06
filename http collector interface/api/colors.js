@@ -2,22 +2,25 @@ var express = require('express');
 var router = express.Router();
 var fs = require('fs');
 var csv = require('csv');
+var bodyParser = require('body-parser');
+var analysis = require('../lib/analysis');
+
 
 var cold_wall;
 var warm_wall;
+var analizer = analysis();
+
+let state = null;
 
 // debug
 function getSeconds(list) {
   for (var i = 1; i < list.length; i++) {
-    //console.log(list[i][0]);
     time_str = list[i][0];
     start_end = time_str.split('-');
-    //console.log(start_end);
     start = start_end[0].split(':');
     end = start_end[1].split(':');
     start_seconds = parseInt(start[0])*60 + parseInt(start[1]);
     end_seconds = parseInt(end[0])*60 + parseInt(end[1])-1;
-    console.log(start_seconds+'-'+end_seconds);
   }
 }
 
@@ -48,19 +51,50 @@ function getColorNames(time, colorcsv) {
   return colors;
 }
 
-function getColors(req, res) {
-  console.log('wall: '+ req.query.wall + 'time: ' + req.query.time);
-  var colors = [];
-  if (req.query.wall == "cold") {
-    colors = getColorNames(req.query.time, cold_wall);
-  } else if (req.query.wall == "warm") {
-    colors = getColorNames(req.query.time, warm_wall);
+function computeHistogram(history) {
+  let histogram = {};
+  let count = 0;
+  history.forEach(colors => {
+    colors.forEach(color => {
+      count++;
+      if (histogram[color] === undefined) histogram[color] = 0;
+      histogram[color]++;
+    });
+  });
+
+  let tuples = [];
+  for (let color in histogram) {
+      tuples.push([color, histogram[color] / count]);
   }
-  res.writeHead(200, {'Content-Type': 'application/json'});
-  res.end(JSON.stringify(colors)); // Send the colors
+
+  return tuples;
 }
 
-function route(sequelize) {
+function setColors(req, res) {
+  var colors = [];
+
+  if (req.body.wall == "cold") {
+    colors = getColorNames(req.body.time, cold_wall);
+  } else if (req.body.wall == "warm") {
+    colors = getColorNames(req.body.time, warm_wall);
+  } else {
+    res.sendStatus(400);
+    return;
+  }
+  state.subject.color_history.push(colors);
+
+  let histogram = computeHistogram(state.subject.color_history);
+  let data = analizer(histogram);
+
+  state.subject.color_traits = data.color_traits;
+  state.subject.additional_traits = data.additional_traits;
+
+  res.sendStatus(200);
+}
+
+function route(external_state) {
+  state = external_state;
+
   fs.readFile('./cold_wall.csv', function(err, data) {
     if (err) {
       console.log("Could not read cold_wall.csv file, make sure it exists");
@@ -88,7 +122,9 @@ function route(sequelize) {
     });
     console.log('read warm_wall.csv file');
   });
-  router.get('/', getColors);
+  var jsonParser = bodyParser.json();
+
+  router.post('/', jsonParser, setColors);
   return router;
 }
 

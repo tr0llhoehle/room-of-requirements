@@ -7,13 +7,15 @@ var fs = require('fs');
 var bodyParser = require('body-parser');
 var routePath = './api';
 
+let state = {};
+
 /**
  * Routes all definitions made in a file under a certain URI.
  * @param file file with further definitions for routing
  * @param route the root address under which the file will be routed
  */
 function routeFile(route, file) {
-  app.use(route, require('' + file)());
+  app.use(route, require('' + file)(state));
   // output to where it's mapped
   console.log(route + " (" + file + ")");
 }
