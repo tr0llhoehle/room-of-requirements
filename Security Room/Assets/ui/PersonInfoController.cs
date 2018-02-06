@@ -10,31 +10,36 @@ public class PersonInfoController : MonoBehaviour {
 	public Text height;
 	public Text weight;
 	// Use this for initialization
-	void Start () {
-		// StartCoroutine(updateBars());
+	void Start() {
+		if (Dummy.ENABLED) {
+			setPersonInfo(Dummy.getDummyPersonInfo());
+		} else {
+			StartCoroutine(updateBars());
+
+		}
 	}
 
 	IEnumerator updateBars() {
 		while (true) {
-			WWW www = new WWW (Utility.PERSONALITY_URL);
+			WWW www = new WWW(Utility.GENERAL_INFO_URL);
 			yield return www;
 			if (www.error == null) {
 				string jsonString = www.text;
-				PersonInfo personInfo = PersonInfo.createFromJsonString (jsonString);
-				subjectId.text = personInfo.id;
-				age.text = personInfo.age;
-				gender.text = personInfo.gender;
-				height.text = personInfo.height;
-				weight.text = personInfo.weight;
+				setPersonInfo(PersonInfo.createFromJsonString(jsonString));
 			} else {
-				print ("personality url not reachable: " + Utility.PERSONALITY_URL);
+				print("general info url not reachable: " + Utility.GENERAL_INFO_URL);
 			}
 
-			print ("waiting");
-			yield return new WaitForSeconds (Utility.UPDATE_INTERVAL);
-			print ("waited");
-
+			yield return new WaitForSeconds(Utility.UPDATE_INTERVAL);
 		}
 	}
-	
+
+	private void setPersonInfo(PersonInfo personInfo) {
+		subjectId.text = personInfo.id;
+		age.text = personInfo.age;
+		gender.text = personInfo.gender;
+		height.text = personInfo.height;
+		weight.text = personInfo.weight;
+	}
+
 }

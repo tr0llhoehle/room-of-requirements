@@ -5,26 +5,25 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class AdditionalTraitController : MonoBehaviour {
-	public Text proList;
-	public Text conList;
+	public Text prosList;
+	public Text consList;
 
-	public Text strengths;
-	public Text weaknesses;
-	public Text likes;
-	public Text dislikes;
-	public Text traits;
+	public Text traitsList;
 
 	public void Start() {
-		ColorPersonality colorPersonality = Dummy.getDummyColorPersonality();
-		setProContraList(colorPersonality);
-		setAdditionalTraits(colorPersonality);
+		if (Dummy.ENABLED) {
+			ColorPersonality colorPersonality = Dummy.getDummyColorPersonality();
+			setProContraList(colorPersonality);
+			setAdditionalTraits(colorPersonality);
+		} else {
+			StartCoroutine(updateTexts());
+		}
 
-		// StartCoroutine(updateTexts());
 	}
 
 	IEnumerator updateTexts() {
 		while (true) {
-			WWW www = new WWW(Utility.PERSONALITY_URL);
+			WWW www = new WWW(Utility.COLOR_TRAITS_URL);
 			yield return www;
 			if (www.error == null) {
 				string jsonString = www.text;
@@ -32,7 +31,7 @@ public class AdditionalTraitController : MonoBehaviour {
 				setProContraList(colorPersonality);
 				setAdditionalTraits(colorPersonality);
 			} else {
-				// print("color personality url not reachable: " + Utility.PERSONALITY_URL);
+				print("color personality url not reachable: " + Utility.COLOR_TRAITS_URL);
 			}
 
 			yield return new WaitForSeconds(Utility.UPDATE_INTERVAL);
@@ -46,26 +45,37 @@ public class AdditionalTraitController : MonoBehaviour {
 		foreach (ProContraColorTraits proContra in personality.color_traits) {
 			foreach (string pro in proContra.pro) {
 				if (!pros.Exists(content => content.Equals(pro))) {
-					pros.Add(pro);
+					pros.Add(" - " + pro);
 				}
 			}
 			foreach (string con in proContra.contra) {
 				if (!cons.Exists(content => content.Equals(con))) {
-					cons.Add(con);
+					cons.Add(" - " + con);
 				}
 			}
 		}
 
-		proList.text = String.Join("\n", pros.ToArray());
-		conList.text = String.Join("\n", cons.ToArray());
+		prosList.text = String.Join("\n", pros.ToArray());
+		consList.text = String.Join("\n", cons.ToArray());
 	}
 
 	private void setAdditionalTraits(ColorPersonality colorPersonality) {
+		HashSet<string> traits = new HashSet<string>();
 		AdditionalColorTraits additionalTraits = colorPersonality.additional_traits;
-		strengths.text = String.Join(", ", additionalTraits.strength);
-		weaknesses.text = String.Join(", ", additionalTraits.weakness);
-		likes.text = String.Join(", ", additionalTraits.likes);
-		dislikes.text = String.Join(", ", additionalTraits.dislikes);
-		traits.text = String.Join(", ", additionalTraits.traits);
+		foreach (string trait in additionalTraits.strength) {
+			traits.Add(trait);
+		}
+		foreach (string trait in additionalTraits.weakness) {
+			traits.Add(trait);
+		}
+		foreach (string trait in additionalTraits.likes) {
+			traits.Add(trait);
+		}
+		foreach (string trait in additionalTraits.dislikes) {
+			traits.Add(trait);
+		}
+		foreach (string trait in additionalTraits.traits) {
+			traits.Add(trait);
+		}
 	}
 }

@@ -1,6 +1,9 @@
 using System;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Dummy {
+	public static readonly bool ENABLED = true;
 
 	public static ColorPersonality getDummyColorPersonality() {
 		ColorPersonality personality = new ColorPersonality();
@@ -32,6 +35,26 @@ public class Dummy {
 		return new ProContraColorTraits {
 				pro = new string[] { "pro5", "pro8", "pro2" },
 				contra = new string[] {"con4","con10" },
+		};
+	}
+
+	public static PersonInfo getDummyPersonInfo() {
+		return new PersonInfo {
+			id = "22354",
+			age = "21",
+			gender = "female",
+			height = "165",
+			weight = "50"
+		};
+	}
+
+	public static GeneralizedPersonality getDummyRandomizedGeneralizedPersonality() {
+		return new GeneralizedPersonality {
+			neuroticism = Random.Range(0f, 100f),
+			openness = Random.Range(0f, 100f),
+			conscientiousness = Random.Range(0f, 100f),
+			agreeableness = Random.Range(0f, 100f),
+			extroversion = Random.Range(0f, 100f)
 		};
 	}
 

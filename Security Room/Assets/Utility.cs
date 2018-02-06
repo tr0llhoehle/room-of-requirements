@@ -5,6 +5,8 @@ public class Utility {
 	private static readonly string BASE_PATH = "localhost:3000/";
 	public static readonly string IMAGE_URL = BASE_PATH + "image";
 	public static readonly string PERSONALITY_URL = BASE_PATH + "personality";
+	public static readonly string GENERAL_INFO_URL = BASE_PATH + "personality";
+	public static readonly string COLOR_TRAITS_URL = BASE_PATH + "personality";
 	//in seconds
 	public static readonly float UPDATE_INTERVAL = 0.5f;
 
