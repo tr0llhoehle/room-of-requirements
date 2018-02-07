@@ -43,10 +43,10 @@ public class PersonInfoController : MonoBehaviour {
 		if (!currentSubjectId.Equals(SharedInfo.subjectId)) {
 			currentSubjectId = SharedInfo.subjectId;
 			subjectId.text = currentSubjectId;
-			age.text = personInfo.age;
+			age.text = personInfo.age + "";
 			gender.text = personInfo.gender;
-			height.text = personInfo.height;
-			weight.text = personInfo.weight;
+			height.text = personInfo.height + "";
+			weight.text = personInfo.weight + "";
 		}
 	}
 

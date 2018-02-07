@@ -3,13 +3,13 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class Dummy {
-	public static readonly bool ENABLED = true;
+	public static readonly bool ENABLED = false;
 
 	public static ColorPersonality getDummyColorPersonality() {
 		ColorPersonality personality = new ColorPersonality();
 
-		personality.additional_traits = getDummyAdditionalColorTraits();
-		personality.color_traits = new ProContraColorTraits[] {getDummyProContraColorTraits1(), getDummyProContraColorTraits2()};
+		// personality.additional_traits = getDummyAdditionalColorTraits();
+		// personality.color_traits = new ProContraColorTraits[] {getDummyProContraColorTraits1(), getDummyProContraColorTraits2()};
 
 		return personality;
 	}
@@ -41,10 +41,10 @@ public class Dummy {
 	public static PersonInfo getDummyPersonInfo() {
 		return new PersonInfo {
 			id = "22354",
-			age = "21",
+			age = 21,
 			gender = "female",
-			height = "165",
-			weight = "50"
+			height = 165,
+			weight = 50
 		};
 	}
 

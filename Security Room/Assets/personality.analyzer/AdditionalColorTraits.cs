@@ -1,5 +1,6 @@
 using System;
 
+[System.Serializable]
 public class AdditionalColorTraits {
 	public string[] strength;
 	public string[] weakness;

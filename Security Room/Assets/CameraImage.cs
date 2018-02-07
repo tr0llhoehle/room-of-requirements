@@ -11,39 +11,39 @@ public class CameraImage : MonoBehaviour {
 	public RawImage img4;
 	public RawImage img5;
 
-    private Texture2D tex1;
-    private Texture2D tex2;
-    private Texture2D tex3;
-    private Texture2D tex4;
-    private Texture2D tex5;
+	private Texture2D tex1;
+	private Texture2D tex2;
+	private Texture2D tex3;
+	private Texture2D tex4;
+	private Texture2D tex5;
 
-    private int currentActiveImage = 0;
+	private int currentActiveImage = 0;
 
-    public float startTime;
+	public float startTime;
 
-    private IEnumerator updateRedraw;
+	private IEnumerator updateRedraw;
 
 	void Start() {
 		//if (Dummy.ENABLED) {
 
 		//} else {
-	    tex1 = new Texture2D(1, 2, TextureFormat.DXT1, false);
-        tex2 = new Texture2D(1, 2, TextureFormat.DXT1, false);
-        tex3 = new Texture2D(1, 2, TextureFormat.DXT1, false);
-        tex4 = new Texture2D(1, 2, TextureFormat.DXT1, false);
-        tex5 = new Texture2D(1, 2, TextureFormat.DXT1, false);
+		tex1 = new Texture2D(1, 2, TextureFormat.DXT1, false);
+		tex2 = new Texture2D(1, 2, TextureFormat.DXT1, false);
+		tex3 = new Texture2D(1, 2, TextureFormat.DXT1, false);
+		tex4 = new Texture2D(1, 2, TextureFormat.DXT1, false);
+		tex5 = new Texture2D(1, 2, TextureFormat.DXT1, false);
 
-        startTime = Time.time;
+		startTime = Time.time;
 
-        updateRedraw = updateAndRedraw();
+		updateRedraw = updateAndRedraw();
 
-            StartCoroutine(updateRedraw);
+		StartCoroutine(updateRedraw);
 
 		//}
 	}
 
 	private void Update() {
-        /*
+		/*
 		if (Time.time - startTime <= 2.0f) {
 			return;
 		}
@@ -61,16 +61,17 @@ public class CameraImage : MonoBehaviour {
 			WWW www = new WWW(Utility.IMAGE_URL);
 			yield return www;
 
-            //if (www.error == null) {
+			//if (www.error == null) {
 
-            Texture2D tex = getCurrentTexture();
-				www.LoadImageIntoTexture(tex);
-                
-				currentActiveImage++;
-				if (currentActiveImage == 5) {
-					currentActiveImage = 0;
-				}
-            getCurrentImage().texture = tex;
+			Texture2D tex = getCurrentTexture();
+			www.LoadImageIntoTexture(tex);
+
+			currentActiveImage++;
+			if (currentActiveImage == 5) {
+				currentActiveImage = 0;
+			}
+			getCurrentImage().texture = tex;
+			getCurrentImage().transform.SetAsLastSibling();
 
 			//} else {
 			//	print("image url not reachable: " + Utility.IMAGE_URL);
@@ -84,34 +85,32 @@ public class CameraImage : MonoBehaviour {
 	private RawImage getCurrentImage() {
 		switch (currentActiveImage) {
 			case 0:
-                return img1;
+				return img1;
 			case 1:
-                return img2;
+				return img2;
 			case 2:
 				return img3;
 			case 3:
 				return img4;
 			case 4:
-            default:
+			default:
 				return img5;
 		}
 	}
 
-    private Texture2D getCurrentTexture()
-    {
-        switch (currentActiveImage)
-        {
-            case 0:
-                return tex1;
-            case 1:
-                return tex2;
-            case 2:
-                return tex3;
-            case 3:
-                return tex4;
-            case 4:
-            default:
-                return tex5;
-        }
-    }
+	private Texture2D getCurrentTexture() {
+		switch (currentActiveImage) {
+			case 0:
+				return tex1;
+			case 1:
+				return tex2;
+			case 2:
+				return tex3;
+			case 3:
+				return tex4;
+			case 4:
+			default:
+				return tex5;
+		}
+	}
 }

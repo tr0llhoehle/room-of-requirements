@@ -15,13 +15,13 @@ public class AdditionalTraitController : MonoBehaviour {
 	private List<string> savedTraits = new List<string>();
 
 	public void Start() {
-		//if (Dummy.ENABLED) {
-		//	ColorPersonality colorPersonality = Dummy.getDummyColorPersonality();
-		//	setProContraList(colorPersonality);
-		//	setAdditionalTraits(colorPersonality);
-		//} else {
+		if (Dummy.ENABLED) {
+			ColorPersonality colorPersonality = Dummy.getDummyColorPersonality();
+			setProContraList(colorPersonality);
+			setAdditionalTraits(colorPersonality);
+		} else {
 			StartCoroutine(updateTexts());
-		//}
+		}
 
 	}
 
@@ -29,7 +29,7 @@ public class AdditionalTraitController : MonoBehaviour {
 		while (true) {
 			WWW www = new WWW(Utility.SUBJECT_URL);
 			yield return www;
-			//if (www.error == null) {
+			if (www.error == null) {
 				string jsonString = www.text;
 				ColorPersonality colorPersonality = ColorPersonality.createFromJsonString(jsonString);
 				if (!currentSubjectId.Equals(SharedInfo.subjectId)) {
@@ -39,9 +39,9 @@ public class AdditionalTraitController : MonoBehaviour {
 					addAdditionalTraits(colorPersonality);
 				}
 				setProContraList(colorPersonality);
-			//} else {
-			//	print("color personality url not reachable: " + Utility.SUBJECT_URL);
-			//}
+			} else {
+				print("color personality url not reachable: " + Utility.SUBJECT_URL);
+			}
 
 			yield return new WaitForSeconds(Utility.UPDATE_INTERVAL);
 		}
@@ -51,17 +51,17 @@ public class AdditionalTraitController : MonoBehaviour {
 		List<string> pros = new List<string>();
 		List<string> cons = new List<string>();
 
-        if (personality.color_traits == null)
-            return;
+		if (personality.color_traits == null)
+			return;
 
 		foreach (ProContraColorTraits proContra in personality.color_traits) {
 			foreach (string pro in proContra.pro) {
-				if (!pros.Exists(content => content.Equals(pro))) {
+				if (!string.IsNullOrEmpty(pro) && !pros.Exists(content => content.Equals(pro))) {
 					pros.Add(" - " + pro);
 				}
 			}
 			foreach (string con in proContra.contra) {
-				if (!cons.Exists(content => content.Equals(con))) {
+				if (!string.IsNullOrEmpty(con) && !cons.Exists(content => content.Equals(con))) {
 					cons.Add(" - " + con);
 				}
 			}
@@ -74,28 +74,33 @@ public class AdditionalTraitController : MonoBehaviour {
 	private void setAdditionalTraits(ColorPersonality colorPersonality) {
 		HashSet<string> traits = new HashSet<string>();
 		AdditionalColorTraits additionalTraits = colorPersonality.additional_traits;
-        if (additionalTraits == null)
-            return;
+		if (additionalTraits == null)
+			return;
 
-        if (additionalTraits.strength != null)
-            foreach (string trait in additionalTraits.strength) {
-			traits.Add(trait);
+		if (additionalTraits.strength != null) {
+			foreach (string trait in additionalTraits.strength) {
+				addTrait(ref traits, trait);
+			}
 		}
-        if (additionalTraits.weakness != null)
-            foreach (string trait in additionalTraits.weakness) {
-			traits.Add(trait);
+		if (additionalTraits.weakness != null) {
+			foreach (string trait in additionalTraits.weakness) {
+				addTrait(ref traits, trait);
+			}
 		}
-        if (additionalTraits.likes != null)
-            foreach (string trait in additionalTraits.likes) {
-			traits.Add(trait);
+		if (additionalTraits.likes != null) {
+			foreach (string trait in additionalTraits.likes) {
+				addTrait(ref traits, trait);
+			}
 		}
-        if (additionalTraits.dislikes != null)
-            foreach (string trait in additionalTraits.dislikes) {
-			traits.Add(trait);
+		if (additionalTraits.dislikes != null) {
+			foreach (string trait in additionalTraits.dislikes) {
+				addTrait(ref traits, trait);
+			}
 		}
-        if (additionalTraits.traits != null)
-            foreach (string trait in additionalTraits.traits) {
-			traits.Add(trait);
+		if (additionalTraits.traits != null) {
+			foreach (string trait in additionalTraits.traits) {
+				addTrait(ref traits, trait);
+			}
 		}
 		string[] traitsArray = new string[traits.Count];
 
@@ -107,31 +112,47 @@ public class AdditionalTraitController : MonoBehaviour {
 
 	private void addAdditionalTraits(ColorPersonality colorPersonality) {
 		AdditionalColorTraits additionalTraits = colorPersonality.additional_traits;
-        if (additionalTraits == null)
-            return;
+		if (additionalTraits == null)
+			return;
 
-        if (additionalTraits.strength != null)
-		foreach (string trait in additionalTraits.strength) {
-			savedTraits.Add(trait);
+		if (additionalTraits.strength != null) {
+			foreach (string trait in additionalTraits.strength) {
+				addTrait(ref savedTraits, trait);
+			}
 		}
-        if (additionalTraits.weakness != null)
-        foreach (string trait in additionalTraits.weakness) {
-			savedTraits.Add(trait);
+		if (additionalTraits.weakness != null) {
+			foreach (string trait in additionalTraits.weakness) {
+				addTrait(ref savedTraits, trait);
+			}
 		}
-        if (additionalTraits.likes != null)
-            foreach (string trait in additionalTraits.likes) {
-			savedTraits.Add(trait);
+		if (additionalTraits.likes != null) {
+			foreach (string trait in additionalTraits.likes) {
+				addTrait(ref savedTraits, trait);
+			}
 		}
-        if (additionalTraits.dislikes != null)
-            foreach (string trait in additionalTraits.dislikes) {
-			savedTraits.Add(trait);
+		if (additionalTraits.dislikes != null) {
+			foreach (string trait in additionalTraits.dislikes) {
+				addTrait(ref savedTraits, trait);
+			}
 		}
-        if (additionalTraits.traits != null)
-            foreach (string trait in additionalTraits.traits) {
-			savedTraits.Add(trait);
+		if (additionalTraits.traits != null) {
+			foreach (string trait in additionalTraits.traits) {
+				addTrait(ref savedTraits, trait);
+			}
 		}
 
 		setTextFromSavedTraits();
+	}
+
+	private void addTrait(ref HashSet<string> set, string trait) {
+		if (!string.IsNullOrEmpty(trait)) {
+			set.Add(trait);
+		}
+	}
+	private void addTrait(ref List<string> list, string trait) {
+		if (!string.IsNullOrEmpty(trait)) {
+			list.Add(trait);
+		}
 	}
 
 	private void setTextFromSavedTraits() {
