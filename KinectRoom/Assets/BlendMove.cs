@@ -6,7 +6,8 @@ public class BlendMove : MonoBehaviour {
     private Renderer renderer;
 
     private TextMesh debugText = null;
-
+    private float balance = 0.5f;
+    private float balanceUpdate = 0.01f;
 
     private void Debug(string text)
     {
@@ -20,10 +21,13 @@ public class BlendMove : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        float balance = 1.0f;
         if (GameModel.Instance.faceData != null)
         {
-            balance = Mathf.Min(1.0f, Mathf.Max(-1.0f, GameModel.Instance.faceData.yaw / -50.0f)) * 0.5f + 0.5f;
+            if (GameModel.Instance.faceData.yaw < 0)
+                balance += balanceUpdate * Mathf.Abs(GameModel.Instance.faceData.yaw / 45.0f);
+            if (GameModel.Instance.faceData.yaw > 0)
+                balance -= balanceUpdate * Mathf.Abs(GameModel.Instance.faceData.yaw / 45.0f);
+            balance = Mathf.Max(0.0f, Mathf.Min(1.0f, balance));
             Debug(string.Format("Balance: {0} Yaw: {1}", balance, GameModel.Instance.faceData.yaw));
             renderer.material.SetFloat("_Balance", balance);
         }

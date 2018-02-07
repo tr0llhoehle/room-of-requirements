@@ -12,10 +12,10 @@ public class GameController : MonoBehaviour
         FINISHED
     }
 
-    public static double MAX_FACE_AGE = 30.0; // seconds
-    public static double MAX_SESSION_LENGTH = 150; // seconds, 2.5min
-    public static double MAX_LOST_LENGTH = 20; // seconds
-    public static double MAX_GESTURE_AGE = 30.0;
+    public static double MAX_FACE_AGE = 10.0; // seconds
+    public static double MAX_SESSION_LENGTH = 75; // seconds, 2.5min
+    public static double MAX_LOST_LENGTH = 10; // seconds
+    public static double MAX_GESTURE_AGE = 10.0;
 
     private ulong sessionStart = 0; // Unix timestamp
     private ulong lostStart = 0; // Unix timestamp
