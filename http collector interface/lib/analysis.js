@@ -62,11 +62,11 @@ function getAdditionalTraits(wall) {
   var traits = wall[1][4].split(";");
 
   var additional_traits = {};
-  additional_traits.strength = [getRandomStrings(strength, 2)];
-  additional_traits.weakness = [getRandomStrings(weakness, 2)];
-  additional_traits.likes = [getRandomStrings(likes, 3)];
-  additional_traits.dislikes = [getRandomStrings(dislikes, 2)];
-  additional_traits.traits = [getRandomStrings(traits, 1)];
+  additional_traits.strength = getRandomStrings(strength, 2);
+  additional_traits.weakness = getRandomStrings(weakness, 2);
+  additional_traits.likes = getRandomStrings(likes, 3);
+  additional_traits.dislikes = getRandomStrings(dislikes, 2);
+  additional_traits.traits = getRandomStrings(traits, 1);
 
   return additional_traits;
 }
