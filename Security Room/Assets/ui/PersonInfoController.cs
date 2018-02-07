@@ -10,25 +10,29 @@ public class PersonInfoController : MonoBehaviour {
 	public Text height;
 	public Text weight;
 
+    private IEnumerator updater;
+
 	private string currentSubjectId  = "";
 	void Start() {
-		if (Dummy.ENABLED) {
-			setPersonInfo(Dummy.getDummyPersonInfo());
-		} else {
-			StartCoroutine(updateBars());
-		}
+        //if (Dummy.ENABLED) {
+        //	setPersonInfo(Dummy.getDummyPersonInfo());
+        //} else {
+        updater = updateBars();
+	    StartCoroutine(updater);
+		//}
 	}
 
 	IEnumerator updateBars() {
 		while (true) {
 			WWW www = new WWW(Utility.SUBJECT_URL);
 			yield return www;
-			if (www.error == null) {
+
+			//if (www.error == null) {
 				string jsonString = www.text;
 				setPersonInfo(PersonInfo.createFromJsonString(jsonString));
-			} else {
-				print("general info url not reachable: " + Utility.SUBJECT_URL);
-			}
+			//} else {
+			//	print("general info url not reachable: " + Utility.SUBJECT_URL);
+			//}
 
 			yield return new WaitForSeconds(Utility.UPDATE_INTERVAL);
 		}

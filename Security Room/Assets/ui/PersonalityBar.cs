@@ -14,17 +14,17 @@ public class PersonalityBar : MonoBehaviour {
 	private string currentSubjectId = "";
 	// Use this for initialization
 	void Start() {
-		if (Dummy.ENABLED) {
-			setAllBars(Dummy.getDummyRandomizedGeneralizedPersonality());
-		} else {
+		//if (Dummy.ENABLED) {
+		//	setAllBars(Dummy.getDummyRandomizedGeneralizedPersonality());
+		//} else {
 			StartCoroutine(updateBars());
-		}
+		//}
 
 	}
 
 	IEnumerator updateBars() {
 		while (true) {
-			WWW www = new WWW(Utility.SUBJECT_URL);
+            WWW www = new WWW(Utility.SUBJECT_URL);
 			yield return www;
 			if (www.error == null) {
 				string jsonString = www.text;

@@ -1,0 +1,27 @@
+Initialize engine version: 2017.1.0f1 (4d7fe18a2f34)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: Intel(R) HD Graphics 520 (ID=0x1916)
+    Vendor:   Intel
+    VRAM:     2111 MB
+    Driver:   21.20.16.4534
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\patrick\Documents\GitHub\room-of-requirements\Security Room\secroom_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\patrick\Documents\GitHub\room-of-requirements\Security Room\secroom_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\patrick\Documents\GitHub\room-of-requirements\Security Room\secroom_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\patrick\Documents\GitHub\room-of-requirements\Security Room\secroom_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\patrick\Documents\GitHub\room-of-requirements\Security Room\secroom_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\patrick\Documents\GitHub\room-of-requirements\Security Room\secroom_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\patrick\Documents\GitHub\room-of-requirements\Security Room\secroom_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\patrick\Documents\GitHub\room-of-requirements\Security Room\secroom_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\patrick\Documents\GitHub\room-of-requirements\Security Room\secroom_Data\Managed\UnityEngine.Timeline.dll (this message is harmless)
+Loading C:\Users\patrick\Documents\GitHub\room-of-requirements\Security Room\secroom_Data\Managed\UnityEngine.Timeline.dll into Unity Child Domain
+Platform assembly: C:\Users\patrick\Documents\GitHub\room-of-requirements\Security Room\secroom_Data\Managed\System.dll (this message is harmless)
+Platform assembly: C:\Users\patrick\Documents\GitHub\room-of-requirements\Security Room\secroom_Data\Managed\System.Core.dll (this message is harmless)
+- Completed reload, in  0.243 seconds
+<RI> Initializing input.
+XInput1_3.dll not found. Trying XInput9_1_0.dll instead...
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 2.234713 ms
