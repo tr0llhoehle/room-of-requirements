@@ -29,9 +29,10 @@ public class AdditionalTraitController : MonoBehaviour {
 		while (true) {
 			WWW www = new WWW(Utility.SUBJECT_URL);
 			yield return www;
-			if (www.error == null) {
+			//if (www.error == null) {
 				string jsonString = www.text;
 				ColorPersonality colorPersonality = ColorPersonality.createFromJsonString(jsonString);
+                //Debug.Log("ColorPersonality: " + colorPersonality.additional_traits.strength.Length);
 				if (!currentSubjectId.Equals(SharedInfo.subjectId)) {
 					savedTraits = new List<string>();
 					setAdditionalTraits(colorPersonality);
@@ -39,9 +40,9 @@ public class AdditionalTraitController : MonoBehaviour {
 					addAdditionalTraits(colorPersonality);
 				}
 				setProContraList(colorPersonality);
-			} else {
-				print("color personality url not reachable: " + Utility.SUBJECT_URL);
-			}
+			//} else {
+				//print("color personality url not reachable: " + Utility.SUBJECT_URL);
+			//}
 
 			yield return new WaitForSeconds(Utility.UPDATE_INTERVAL);
 		}
@@ -163,6 +164,6 @@ public class AdditionalTraitController : MonoBehaviour {
 			toShow.AddRange(savedTraits);
 		}
 
-		traitsList.text = string.Join("\n ", toShow.ToArray());
+		traitsList.text = string.Join("\n", toShow.ToArray());
 	}
 }

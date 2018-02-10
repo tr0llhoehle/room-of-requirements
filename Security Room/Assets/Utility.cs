@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Utility {
-	private static readonly string BASE_PATH = "http://127.0.0.1:3000/";
+	private static readonly string BASE_PATH = "http://localhost:3000/";
 	public static readonly string IMAGE_URL = BASE_PATH + "current_image";
 	public static readonly string SUBJECT_URL = BASE_PATH + "current_subject";
 	// public static readonly string PERSONALITY_URL = BASE_PATH + "personality";
