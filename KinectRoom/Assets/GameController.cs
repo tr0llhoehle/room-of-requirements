@@ -25,6 +25,9 @@ public class GameController : MonoBehaviour
     private SpriteRenderer leaving = null;
     private SpriteRenderer loading = null;
     private SpriteRenderer standing = null;
+    private Renderer frontRenderer;
+    private Renderer leftRenderer;
+    private Renderer rightRenderer;
 
 
     private void HideSprite(SpriteRenderer sprite)
@@ -37,7 +40,25 @@ public class GameController : MonoBehaviour
         sprite.color = new Color(1f, 1f, 1f, Mathf.PingPong(Time.time, 1));
     }
 
+    private void EnableColors()
+    {
+        leftRenderer.material.SetFloat("_Saturation", 1.0f);
+        frontRenderer.material.SetFloat("_Saturation", 1.0f);
+        rightRenderer.material.SetFloat("_Saturation", 1.0f);
+        leftRenderer.material.SetFloat("_Lightness", 1.0f);
+        frontRenderer.material.SetFloat("_Lightness", 1.0f);
+        rightRenderer.material.SetFloat("_Lightness", 1.0f);
+    }
 
+    private void DisableColors()
+    {
+        leftRenderer.material.SetFloat("_Saturation", 0.5f);
+        frontRenderer.material.SetFloat("_Saturation", 0.5f);
+        rightRenderer.material.SetFloat("_Saturation", 0.5f);
+        leftRenderer.material.SetFloat("_Lightness", 0.5f);
+        frontRenderer.material.SetFloat("_Lightness", 0.5f);
+        rightRenderer.material.SetFloat("_Lightness", 0.5f);
+    }
 
     private void Start()
     {
@@ -46,11 +67,15 @@ public class GameController : MonoBehaviour
         leaving = GameObject.Find("Leaving").GetComponent<SpriteRenderer>();
         loading = GameObject.Find("Loading").GetComponent<SpriteRenderer>();
         standing = GameObject.Find("Standing").GetComponent<SpriteRenderer>();
+        frontRenderer = GameObject.Find("Front Wall").GetComponent<Renderer>();
+        leftRenderer = GameObject.Find("Left Wall").GetComponent<Renderer>();
+        rightRenderer = GameObject.Find("Right Wall").GetComponent<Renderer>();
 
         HideSprite(handsUp);
         HideSprite(leaving);
         HideSprite(loading);
         HideSprite(standing);
+        DisableColors();
     }
 
     private ulong GetUnixNow()
@@ -127,6 +152,7 @@ public class GameController : MonoBehaviour
         {
             disclaimerTransform.transform.position = new Vector3(0f, -4.31f, 3.037f);
             HideSprite(handsUp);
+            DisableColors();
 
             return State.INITIAL;
         }
@@ -146,6 +172,7 @@ public class GameController : MonoBehaviour
             sessionStart = GetUnixNow();
             disclaimerTransform.transform.position = new Vector3(0f, -4.31f, 3.037f);
             HideSprite(handsUp);
+            EnableColors();
             return State.SCENE;
         }
 
@@ -159,11 +186,13 @@ public class GameController : MonoBehaviour
         if (!HasFace())
         {
             lostStart = GetUnixNow();
+            DisableColors();
             return State.LOST_USER;
         }
 
         if (GetSessionLength() > MAX_SESSION_LENGTH)
         {
+            DisableColors();
             return State.FINISHED;
         }
 
@@ -175,12 +204,14 @@ public class GameController : MonoBehaviour
         if (HasFace())
         {
             HideSprite(loading);
+            EnableColors();
             return State.SCENE;
         }
 
         if (GetLostLength() > MAX_LOST_LENGTH)
         {
             HideSprite(loading);
+            DisableColors();
             return State.INITIAL;
         }
 
@@ -194,6 +225,7 @@ public class GameController : MonoBehaviour
         if (!HasFace())
         {
             HideSprite(leaving);
+            DisableColors();
             return State.INITIAL;
         }
 
