@@ -5,7 +5,7 @@ let state = null;
 let default_subject = {
     "id": "105",
     "age": 25,                    // age in years
-    "gender": 23,                 // min 0 indicates male, max 100 indicates female
+    "gender": 'f',                 // min 0 indicates male, max 100 indicates female
     "height":185,                 // height in meters
     "weight":80,                  // weight in kg
     "color_traits": {

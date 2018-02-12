@@ -2,7 +2,9 @@ var express = require('express');
 var router = express.Router();
 var fs = require('fs');
 var bodyParser = require('body-parser');
+var request = require('request');
 
+let state = null;
 var image = null;
 
 function getImage(req, res) {
@@ -15,13 +17,36 @@ function getImage(req, res) {
   }
 }
 
-function setImage(req, res) {
-  image = new Buffer(req.body, 'binary');
-  res.sendStatus(200);
+function get_gender_age(cb) {
+  request('http://localhost:7000/', function(error, response, body) {
+    return cb(error, JSON.parse(body));
+  })
 }
 
-function route() {
-  var rawParser = bodyParser.raw({type: '*/*'});
+function setImage(req, res) {
+  image = new Buffer(req.body, 'binary');
+
+  get_gender_age((err, resp) => {
+    if (err != null)
+    {
+      console.log(err);
+      res.sendStatus(200);
+
+      return;
+    }
+
+    state.subject.age = resp.age;
+    state.subject.gender = resp.gender;
+
+    res.sendStatus(200);
+
+  });
+
+}
+
+function route(external_state) {
+  state = external_state;
+  var rawParser = bodyParser.raw({type: '*/*', limit: "50mb"});
 
   router.get('/', getImage);
   router.post('/', rawParser, setImage);

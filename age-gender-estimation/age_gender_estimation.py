@@ -109,8 +109,10 @@ def upload_file():
         data = np.fromstring(in_memory_file.getvalue(), dtype=np.uint8)
         color_image_flag = 1
         img = cv2.imdecode(data, color_image_flag)
-
-        return "{"+main(img)+"}"
+        if img is not None:
+            return "{"+main(img)+"}"
+        else:
+            return "\"state\":\"error\""
     if request.method == 'POST':
         # check if the post request has the file part
         if 'file' not in request.files:
