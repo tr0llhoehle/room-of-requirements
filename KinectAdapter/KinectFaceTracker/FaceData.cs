@@ -9,6 +9,7 @@ namespace KinectFaceTracker
         public int roll;
         public int pitch;
         public int yaw;
+        public double height;
         public ulong id;
         public ulong time;
     };

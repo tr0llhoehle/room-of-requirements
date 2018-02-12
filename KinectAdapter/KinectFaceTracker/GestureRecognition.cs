@@ -19,6 +19,7 @@ namespace KinectFaceTracker
                 Joint leftHand = body.Joints[JointType.HandLeft];
                 Joint rightHand = body.Joints[JointType.HandRight];
                 Joint head = body.Joints[JointType.Head];
+
                 bool handsAboveHead = leftHand.Position.Y > head.Position.Y && rightHand.Position.Y > head.Position.Y;
                 bool handsBesidesHead = leftHand.Position.X < head.Position.X && rightHand.Position.X > head.Position.X;
 

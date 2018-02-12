@@ -398,6 +398,37 @@ namespace KinectFaceTracker
             return index;
         }
 
+        double EuclideanDistance(CameraSpacePoint p1, CameraSpacePoint p2)
+        {
+            return Math.Sqrt(Math.Pow(p1.X - p2.X, 2) + Math.Pow(p1.Z - p2.Z, 2) + Math.Pow(p1.Z - p2.Z, 2));
+        }
+
+        delegate double Distance(JointType a, JointType b);
+        private double MeasureHeight(Body body)
+        {
+            Distance d = (a, b) =>
+            {
+                var p1 = body.Joints[a].Position;
+                var p2 = body.Joints[b].Position;
+                return EuclideanDistance(p1, p2);
+            };
+            double torso_height = d(JointType.Head, JointType.Neck) +
+               d(JointType.Neck, JointType.SpineShoulder) +
+               d(JointType.SpineShoulder, JointType.SpineMid) +
+               d(JointType.SpineMid, JointType.SpineBase) +
+               0.5 * d(JointType.SpineMid, JointType.HipRight) + 0.5 * d(JointType.SpineMid, JointType.HipRight);
+
+            double left_leg_height = d(JointType.HipLeft, JointType.KneeLeft) +
+                              d(JointType.KneeLeft, JointType.AnkleLeft) +
+                              d(JointType.AnkleLeft, JointType.FootLeft);
+
+            double right_leg_height = d(JointType.HipRight, JointType.KneeRight) +
+                           d(JointType.KneeRight, JointType.AnkleRight) +
+                           d(JointType.AnkleRight, JointType.FootRight);
+
+            return torso_height + (left_leg_height + right_leg_height) / 2.0;
+        }
+
         /// <summary>
         /// Handles the body frame data arriving from the sensor
         /// </summary>
@@ -465,6 +496,7 @@ namespace KinectFaceTracker
             FaceData faceData = new FaceData();
             faceData.id = faceResult.TrackingId;
             faceData.time = (ulong)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
+            faceData.height = Math.Max(1.5, Math.Min(2.0, MeasureHeight(this.bodies[faceIndex])));
 
             // extract each face property information and store it in faceText
             if (faceResult.FaceProperties != null)
