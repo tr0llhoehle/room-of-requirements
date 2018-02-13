@@ -19,11 +19,15 @@ function getImage(req, res) {
 
 function get_gender_age(cb) {
   request('http://localhost:7000/', function(error, response, body) {
-    return cb(error, JSON.parse(body));
+    if (error != null)
+    {
+      return cb(error, null);
+    }
+    return cb(null, JSON.parse(body));  
   })
 }
 
-function setImage(req, res) {
+function setImage(req, res, next) {
   image = new Buffer(req.body, 'binary');
 
   get_gender_age((err, resp) => {
@@ -32,6 +36,8 @@ function setImage(req, res) {
       console.log(err);
       res.sendStatus(200);
 
+      next();
+
       return;
     }
 
@@ -39,9 +45,8 @@ function setImage(req, res) {
     state.subject.gender = resp.gender;
 
     res.sendStatus(200);
-
+    next();
   });
-
 }
 
 function route(external_state) {

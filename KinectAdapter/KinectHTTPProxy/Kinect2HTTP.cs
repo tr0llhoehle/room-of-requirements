@@ -1,6 +1,7 @@
 ﻿using KinectFaceTracker;
 using System.Drawing;
 using System;
+using System.Threading.Tasks;
 
 namespace KinectHTTPProxy
 {
@@ -10,12 +11,10 @@ namespace KinectHTTPProxy
         private HTTPConnection connection = new HTTPConnection();
         private MovingAverage avg;
         private ulong lastImageUpdate = 0;
-        private ulong updatePeriode = 1000;
+        private ulong updatePeriode = 10000;
 
         public Kinect2HTTP()
         {
-            this.sensor.Setup();
-
             avg = new MovingAverage(this.sensor);
             this.avg.FaceChanged += this.Face_Changed;
             this.sensor.GestureChanged += this.Gesture_Changed;
@@ -28,9 +27,17 @@ namespace KinectHTTPProxy
             get { return this.sensor.debugWindow; }
         }
 
+        public Task Connect()
+        {
+            this.sensor.Setup();
+
+            return this.connection.Connect();
+        }
+
         public void Shutdown()
         {
             sensor.Shutdown();
+            connection.Shutdown();
         }
 
         private void DepthImage_Changed(object sender, ImageData bm)

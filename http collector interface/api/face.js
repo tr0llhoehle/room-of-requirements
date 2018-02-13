@@ -6,7 +6,6 @@ var external_state = null;
 var state = {time: 0};
 
 function getState(req, res) {
-  console.log(req.query);
   res.writeHead(200, {'Content-Type': 'application/json'});
   res.end(JSON.stringify(state)); // Send the file data to the browser.
 }
@@ -16,6 +15,7 @@ function setState(req, res) {
   {
       external_state.subject.id = req.body.id;
       external_state.subject.height = req.body.height;
+      external_state.subject.weight = req.body.weight;
       console.log('face: ' + JSON.stringify(req.body));
       state = req.body;
   }

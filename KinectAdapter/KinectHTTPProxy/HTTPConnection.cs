@@ -5,6 +5,8 @@ using System.Drawing;
 using System.Drawing.Imaging;
 
 using KinectFaceTracker;
+using System.Threading.Tasks;
+using System.Collections.Concurrent;
 
 namespace KinectHTTPProxy
 {
@@ -18,12 +20,54 @@ namespace KinectHTTPProxy
 
         private JavaScriptSerializer ser = new JavaScriptSerializer();
 
+        bool running = true;
+        private BlockingCollection<ImageData> image_queue = new BlockingCollection<ImageData>();
+        private BlockingCollection<ImageData> depth_queue = new BlockingCollection<ImageData>();
+        private BlockingCollection<FaceData> face_queue = new BlockingCollection<FaceData>();
+        private BlockingCollection<GestureData> gesture_queue = new BlockingCollection<GestureData>();
+
         public HTTPConnection()
         {
             faceServer = new Uri(baseURL + "/face");
             gestureServer = new Uri(baseURL + "/gesture");
             colorServer = new Uri(baseURL + "/current_image?id={0}&time={1}");
             depthServer = new Uri(baseURL + "/depth?id={0}&time={1}");
+        }
+
+        public Task Connect()
+        {
+            var image_task = Task.Run(() => {
+                while (running)
+                {
+                    ImageData image = image_queue.Take();
+                    SendImage(image, colorServer);
+                }
+            });
+
+            var face_task = Task.Run(() => {
+                while (running)
+                {
+                    FaceData face = face_queue.Take();
+                    SendData(ser.Serialize(face), faceServer);
+                }
+            });
+
+            var gesture_task = Task.Run(() => {
+                while (running)
+                {
+                    GestureData gesture = gesture_queue.Take();
+                    SendData(ser.Serialize(gesture), gestureServer);
+                }
+            });
+
+            return Task.Run(() => {
+                Task.WaitAll(new Task[] { image_task, face_task, gesture_task });
+            });
+        }
+
+        public void Shutdown()
+        {
+            running = false;
         }
 
         private void SendImage(ImageData bm, Uri url)
@@ -59,7 +103,7 @@ namespace KinectHTTPProxy
             using (WebClient wc = new WebClient())
             {
                 wc.Headers[HttpRequestHeader.ContentType] = "image/png";
-                wc.UploadData(url, "POST", result);
+                wc.UploadDataAsync(url, "POST", result);
             }
         }
 
@@ -74,22 +118,22 @@ namespace KinectHTTPProxy
 
         public void SendDepthImage(ImageData bm)
         {
-            SendImage(bm, depthServer);
+            depth_queue.Add(bm);
         }
 
         public void SendColorImage(ImageData bm)
         {
-            SendImage(bm, colorServer);
+            image_queue.Add(bm);
         }
 
         public void SendData(FaceData data)
         {
-            SendData(ser.Serialize(data), faceServer);
+            face_queue.Add(data);
         }
 
         public void SendData(GestureData data)
         {
-            SendData(ser.Serialize(data), gestureServer);
+            gesture_queue.Add(data);
         }
     }
 }

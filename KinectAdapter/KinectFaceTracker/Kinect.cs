@@ -296,31 +296,27 @@ namespace KinectFaceTracker
 
                     using (frame)
                     {
-                        Bitmap outputImage = null;
-                        System.Drawing.Imaging.BitmapData imageData = null;
                         // Next get the frame's description and create an output bitmap image.
                         FrameDescription description = frame.FrameDescription;
-                        outputImage = new Bitmap(description.Width, description.Height, PixelFormat.Format32bppArgb);
+                        var outputImage = new Bitmap(description.Width, description.Height, PixelFormat.Format32bppArgb);
 
                         // Next, we create the raw data pointer for the bitmap, as well as the size of the image's data.
-                        imageData = outputImage.LockBits(new Rectangle(0, 0, outputImage.Width, outputImage.Height),
+                        var imageData = outputImage.LockBits(new Rectangle(0, 0, outputImage.Width, outputImage.Height),
                             ImageLockMode.WriteOnly, outputImage.PixelFormat);
                         IntPtr imageDataPtr = imageData.Scan0;
                         int size = imageData.Stride * outputImage.Height;
 
-                        using (frame)
+                        // After this, we copy the image data directly to the buffer.  Note that while this is in BGRA format, it will be flipped due
+                        // to the endianness of the data.
+                        if (frame.RawColorImageFormat == ColorImageFormat.Bgra)
                         {
-                            // After this, we copy the image data directly to the buffer.  Note that while this is in BGRA format, it will be flipped due
-                            // to the endianness of the data.
-                            if (frame.RawColorImageFormat == ColorImageFormat.Bgra)
-                            {
-                                frame.CopyRawFrameDataToIntPtr(imageDataPtr, (uint)size);
-                            }
-                            else
-                            {
-                                frame.CopyConvertedFrameDataToIntPtr(imageDataPtr, (uint)size, ColorImageFormat.Bgra);
-                            }
+                            frame.CopyRawFrameDataToIntPtr(imageDataPtr, (uint)size);
                         }
+                        else
+                        {
+                            frame.CopyConvertedFrameDataToIntPtr(imageDataPtr, (uint)size, ColorImageFormat.Bgra);
+                        }
+
                         // Finally, unlock the output image's raw data again and create a new bitmap for the preview picture box.
                         outputImage.UnlockBits(imageData);
 
@@ -339,7 +335,7 @@ namespace KinectFaceTracker
                         data.image = cropped;
                         data.id = this.faceFrameResults[i].TrackingId;
                         data.time = (ulong)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
-                
+
                         OnColorImageChanged(data);
                 
                         break;
@@ -496,7 +492,9 @@ namespace KinectFaceTracker
             FaceData faceData = new FaceData();
             faceData.id = faceResult.TrackingId;
             faceData.time = (ulong)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalMilliseconds;
-            faceData.height = Math.Max(1.5, Math.Min(2.0, MeasureHeight(this.bodies[faceIndex])));
+            double height = MeasureHeight(this.bodies[faceIndex]);
+            faceData.height = Math.Max(1.5, Math.Min(2.0, height));
+            faceData.weight = faceData.height * faceData.height * 20;
 
             // extract each face property information and store it in faceText
             if (faceResult.FaceProperties != null)

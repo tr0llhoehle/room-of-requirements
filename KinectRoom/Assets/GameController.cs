@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
@@ -29,6 +30,24 @@ public class GameController : MonoBehaviour
     private Renderer leftRenderer;
     private Renderer rightRenderer;
 
+    System.Collections.IEnumerator SendReset()
+    {
+        if (GameModel.Instance.faceData != null)
+        {
+            var postHeader = new Dictionary<string, string>();
+            postHeader.Add("Content-Type", "application/json");
+
+            var raw_data = System.Text.Encoding.UTF8.GetBytes("{}");
+
+            WWW www = new WWW("https://localhost:3000/current_subject", raw_data, postHeader);
+            yield return www;
+        }
+    }
+
+    private void ResetSubject()
+    {
+        StartCoroutine(SendReset());
+    }
 
     private void HideSprite(SpriteRenderer sprite)
     {
@@ -76,6 +95,7 @@ public class GameController : MonoBehaviour
         HideSprite(loading);
         HideSprite(standing);
         DisableColors();
+        ResetSubject();
     }
 
     private ulong GetUnixNow()
@@ -153,18 +173,14 @@ public class GameController : MonoBehaviour
             disclaimerTransform.transform.position = new Vector3(0f, -4.31f, 3.037f);
             HideSprite(handsUp);
             DisableColors();
+            ResetSubject();
 
             return State.INITIAL;
         }
 
         if (HasGesture())
         {
-            Debug.Log(string.Format("gesture: {0}", GameModel.Instance.gestureData.type));
             GameModel.Instance.agreed = GameModel.Instance.gestureData.type == 1; // HandsAboveHead
-        }
-        else
-        {
-            Debug.Log("No gesture data");
         }
 
         if (GameModel.Instance.agreed)
@@ -212,6 +228,7 @@ public class GameController : MonoBehaviour
         {
             HideSprite(loading);
             DisableColors();
+            ResetSubject();
             return State.INITIAL;
         }
 
@@ -226,6 +243,7 @@ public class GameController : MonoBehaviour
         {
             HideSprite(leaving);
             DisableColors();
+            ResetSubject();
             return State.INITIAL;
         }
 

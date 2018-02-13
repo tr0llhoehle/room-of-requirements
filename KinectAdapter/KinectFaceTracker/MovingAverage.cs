@@ -9,8 +9,8 @@ namespace KinectFaceTracker
     public class MovingAverage
     {
         private List<FaceData> buffer = new List<FaceData>();
-        private int maxBuffer = 10;
-        private ulong updatePeriode = 50;
+        private ulong maxBuffer = 10;
+        private ulong updatePeriode = 300;
         private ulong lastUpdate = 0;
 
         public event FaceChangedEventHandler FaceChanged;
@@ -23,7 +23,7 @@ namespace KinectFaceTracker
         private void Face_Changed(object sender, FaceData faceData)
         {
             buffer.Add(faceData);
-            if (buffer.Count > maxBuffer)
+            if (buffer.Count > (int)maxBuffer)
             {
                 buffer.RemoveAt(0);
             }
@@ -36,15 +36,25 @@ namespace KinectFaceTracker
             newEstimation.yaw = 0;
             newEstimation.time = faceData.time;
 
+            int count = 0;
             foreach (FaceData data in buffer)
             {
-                newEstimation.roll += data.roll;
-                newEstimation.pitch += data.pitch;
-                newEstimation.yaw += data.yaw;
+                if (data.time - faceData.time < maxBuffer * updatePeriode)
+                {
+                    newEstimation.roll += data.roll;
+                    newEstimation.pitch += data.pitch;
+                    newEstimation.yaw += data.yaw;
+                    newEstimation.height += data.height;
+                    newEstimation.weight += data.weight;
+
+                    count++;
+                }
             }
-            newEstimation.roll /= buffer.Count;
-            newEstimation.pitch /= buffer.Count;
-            newEstimation.yaw /= buffer.Count;
+            newEstimation.roll /= count;
+            newEstimation.pitch /= count;
+            newEstimation.yaw /= count;
+            newEstimation.height /= count;
+            newEstimation.weight /= count;
 
             if (faceData.time - lastUpdate > updatePeriode)
             {
