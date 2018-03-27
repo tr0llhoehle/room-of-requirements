@@ -322,8 +322,8 @@ namespace KinectFaceTracker
 
                         var rect = this.faceFrameResults[i].FaceBoundingBoxInColorSpace;
                         Rectangle bbox = new Rectangle(Math.Max(0, rect.Left - 30), Math.Max(0, rect.Top-30),
-                                                       Math.Min(rect.Right - rect.Left + 30, outputImage.Width),
-                                                       Math.Min(rect.Bottom - rect.Top + 30, outputImage.Height));
+                                                       Math.Min(rect.Right - rect.Left + 60, outputImage.Width),
+                                                       Math.Min(rect.Bottom - rect.Top + 60, outputImage.Height));
                         Bitmap cropped = CropImage(outputImage, bbox);
 
                         if (this.debugWindow != null)

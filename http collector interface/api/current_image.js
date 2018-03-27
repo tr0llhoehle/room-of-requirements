@@ -6,6 +6,7 @@ var request = require('request');
 
 let state = null;
 var image = null;
+let last_gender_update = 0;
 
 function getImage(req, res) {
   if (image != null) {
@@ -27,26 +28,34 @@ function get_gender_age(cb) {
   })
 }
 
-function setImage(req, res, next) {
-  image = new Buffer(req.body, 'binary');
-
+function set_gender_age(image, timestamp) {
   get_gender_age((err, resp) => {
     if (err != null)
     {
       console.log(err);
-      res.sendStatus(200);
-
-      next();
-
       return;
     }
 
-    state.subject.age = resp.age;
-    state.subject.gender = resp.gender;
-
-    res.sendStatus(200);
-    next();
+    if (last_gender_update < timestamp)
+    {
+      if (resp.state == "success")
+      {
+      	state.subject.age = resp.age;
+        state.subject.gender = resp.gender;
+      }
+      last_gender_update = timestamp;
+      console.log(JSON.stringify(resp));
+    }
   });
+}
+
+function setImage(req, res, next) {
+  image = new Buffer(req.body, 'binary');
+
+  set_gender_age(image, +Date.now())
+
+  res.sendStatus(200);
+  next();
 }
 
 function route(external_state) {

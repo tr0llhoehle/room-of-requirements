@@ -13,7 +13,7 @@ public class BlendMove : MonoBehaviour {
 
     private void Debug(string text)
     {
-        debugText.text = text;
+        //debugText.text = text;
     }
     // Use this for initialization
     void Start () {

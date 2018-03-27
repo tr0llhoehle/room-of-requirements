@@ -136,6 +136,6 @@ C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPP
 C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Release\Microsoft.Kinect.xml
 C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\bin\x64\Release\Microsoft.Kinect.Face.xml
 C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\obj\x64\Release\KinectHTTPProxy.csprojResolveAssemblyReference.cache
+C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\obj\x64\Release\KinectHTTPProxy.csproj.CoreCompileInputs.cache
 C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\obj\x64\Release\KinectHTTPProxy.exe
 C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\obj\x64\Release\KinectHTTPProxy.pdb
-C:\Users\patrick\Documents\GitHub\room-of-requirements\KinectAdapter\KinectHTTPProxy\obj\x64\Release\KinectHTTPProxy.csproj.CoreCompileInputs.cache

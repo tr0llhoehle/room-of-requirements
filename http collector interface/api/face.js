@@ -13,7 +13,7 @@ function getState(req, res) {
 function setState(req, res) {
   if (state.time < req.body.time)
   {
-      external_state.subject.id = req.body.id;
+      //external_state.subject.id = req.body.id;
       external_state.subject.height = req.body.height;
       external_state.subject.weight = req.body.weight;
       console.log('face: ' + JSON.stringify(req.body));

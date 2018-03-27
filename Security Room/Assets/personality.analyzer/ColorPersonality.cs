@@ -7,6 +7,7 @@ public class ColorPersonality {
 	public AdditionalColorTraits additional_traits;
 
 	public static ColorPersonality createFromJsonString(string jsonString) {
+        Debug.Log(jsonString);
 		return JsonUtility.FromJson<ColorPersonality>(jsonString);
 	}
 }
