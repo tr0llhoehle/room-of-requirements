@@ -14,12 +14,12 @@ public class PersonInfoController : MonoBehaviour {
 
 	private string currentSubjectId  = "";
 	void Start() {
-        //if (Dummy.ENABLED) {
-        //	setPersonInfo(Dummy.getDummyPersonInfo());
-        //} else {
-        updater = updateBars();
-	    StartCoroutine(updater);
-		//}
+        if (Dummy.ENABLED) {
+        	setPersonInfo(Dummy.getDummyPersonInfo());
+        } else {
+			updater = updateBars();
+			StartCoroutine(updater);
+		}
 	}
 
 	IEnumerator updateBars() {
@@ -28,8 +28,8 @@ public class PersonInfoController : MonoBehaviour {
 			yield return www;
 
 			//if (www.error == null) {
-				string jsonString = www.text;
-				setPersonInfo(PersonInfo.createFromJsonString(jsonString));
+			string jsonString = www.text;
+			setPersonInfo(PersonInfo.createFromJsonString(jsonString));
 			//} else {
 			//	print("general info url not reachable: " + Utility.SUBJECT_URL);
 			//}
@@ -40,16 +40,19 @@ public class PersonInfoController : MonoBehaviour {
 
 	private void setPersonInfo(PersonInfo personInfo) {
 		SharedInfo.subjectId = personInfo.id;
-		//if (!currentSubjectId.Equals(SharedInfo.subjectId)) {
+		if (!currentSubjectId.Equals(SharedInfo.subjectId)) {
 			currentSubjectId = SharedInfo.subjectId;
 			subjectId.text = currentSubjectId;
             if (personInfo.age > 0)
 			    age.text = personInfo.age + "";
             if (personInfo.gender != "")
                 gender.text = personInfo.gender;
-			height.text = personInfo.height*100 + "";
+			if (personInfo.height < 3) {
+				personInfo.height *= 100;
+			}
+			height.text = personInfo.height + "";
 			weight.text = personInfo.weight + "";
-		//}
+		}
 	}
 
 }
