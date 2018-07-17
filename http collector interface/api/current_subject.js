@@ -27,15 +27,17 @@ function getValue(req, res) {
 }
 
 function reset(req, res) {
+  console.log("Reset!");
   state.subject = JSON.parse(JSON.stringify(default_subject));
   state.subject.id = getRandomInt(200, 5000); 
+  res.end();
 }
 
 function route(external_state) {
   state = external_state;
   state.subject = JSON.parse(JSON.stringify(default_subject));
   router.get('/', getValue);
-  router.post('/', reset);
+  router.get('/reset', reset);
   return router;
 }
 

@@ -8,12 +8,13 @@ public class DisplayScript : MonoBehaviour
 	{
 		Debug.Log("displays connected: " + Display.displays.Length);
 		// Display.displays[0] is the primary, default display and is always ON.
-		// Check if additional displays are available and activate each.
-		if (Display.displays.Length > 2) {
+		// Check if additional displays are available and activate each. For the walls.
+		if (Display.displays.Length == 4) {
 			Debug.Log ("Using multi-display support");
-			Display.displays [1].Activate ();
-			Display.displays [2].Activate ();
-		} else {
+			Display.displays [1].Activate();
+			Display.displays [2].Activate();
+            Display.displays [3].Activate();
+        } else {
 			Debug.Log ("Activating split screen mode.");
 			Camera left = GameObject.Find ("Left Camera").GetComponent<Camera>();
 			Camera middle = GameObject.Find ("Main Camera").GetComponent<Camera>();

@@ -32,16 +32,8 @@ public class GameController : MonoBehaviour
 
     System.Collections.IEnumerator SendReset()
     {
-        if (GameModel.Instance.faceData != null)
-        {
-            var postHeader = new Dictionary<string, string>();
-            postHeader.Add("Content-Type", "application/json");
-
-            var raw_data = System.Text.Encoding.UTF8.GetBytes("{}");
-
-            WWW www = new WWW("https://localhost:3000/current_subject", raw_data, postHeader);
-            yield return www;
-        }
+        WWW www = new WWW("http://127.0.0.1:3000/current_subject/reset");
+        yield return www;
     }
 
     private void ResetSubject()
