@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class TraitsChartController : MonoBehaviour {
 	public RadarChart personalityChart;
@@ -12,31 +13,42 @@ public class TraitsChartController : MonoBehaviour {
 	private List<string> savedTraits = new List<string>();
 
 	public void Start() {
+		
 		if (Dummy.ENABLED) {
 			ColorPersonality colorPersonality = Dummy.getDummyColorPersonality();
 			setProContraList(colorPersonality);
 			setAdditionalTraits(colorPersonality);
 		} else {
+			for (int i = 0; i < personalityChart.GetParameters().Count; i++) {
+				personalityChart.SetParameter(i, 0);
+			}
 			StartCoroutine(updateTexts());
 		}
 
 	}
+
+	// public void Update() {
+	// 	for (int i = 0; i < personalityChart.GetParameters().Count; i++) {
+	// 		personalityChart.SetParameter(i, Random.Range(0.0f, 1.0f));
+
+	// 	}
+	// }
 
 	IEnumerator updateTexts() {
 		while (true) {
 			WWW www = new WWW(Utility.SUBJECT_URL);
 			yield return www;
 			//if (www.error == null) {
-				string jsonString = www.text;
-				ColorPersonality colorPersonality = ColorPersonality.createFromJsonString(jsonString);
-                //Debug.Log("ColorPersonality: " + colorPersonality.additional_traits.strength.Length);
-				if (!currentSubjectId.Equals(SharedInfo.subjectId)) {
-					savedTraits = new List<string>();
-					setAdditionalTraits(colorPersonality);
-				} else {
-					addAdditionalTraits(colorPersonality);
-				}
-				setProContraList(colorPersonality);
+			string jsonString = www.text;
+			ColorPersonality colorPersonality = ColorPersonality.createFromJsonString(jsonString);
+			//Debug.Log("ColorPersonality: " + colorPersonality.additional_traits.strength.Length);
+			if (!currentSubjectId.Equals(SharedInfo.subjectId)) {
+				savedTraits = new List<string>();
+				setAdditionalTraits(colorPersonality);
+			} else {
+				addAdditionalTraits(colorPersonality);
+			}
+			setProContraList(colorPersonality);
 			//} else {
 				//print("color personality url not reachable: " + Utility.SUBJECT_URL);
 			//}
@@ -56,17 +68,17 @@ public class TraitsChartController : MonoBehaviour {
 			foreach (string pro in proContra.pro) {
 				if (!string.IsNullOrEmpty(pro) && !pros.Exists(content => content.Equals(pro))) {
 					pros.Add(" - " + pro);
+					updateChart(PersonalityGeneralizer.getPersonality(pro));
 				}
 			}
 			foreach (string con in proContra.contra) {
 				if (!string.IsNullOrEmpty(con) && !cons.Exists(content => content.Equals(con))) {
 					cons.Add(" - " + con);
+					updateChart(PersonalityGeneralizer.getPersonality(con));
 				}
 			}
 		}
 
-		prosList.text = String.Join("\n", pros.ToArray());
-		consList.text = String.Join("\n", cons.ToArray());
 	}
 
 	private void setAdditionalTraits(ColorPersonality colorPersonality) {
@@ -144,13 +156,51 @@ public class TraitsChartController : MonoBehaviour {
 
 	private void addTrait(ref HashSet<string> set, string trait) {
 		if (!string.IsNullOrEmpty(trait)) {
+			updateChart(PersonalityGeneralizer.getPersonality(trait));
 			set.Add(trait);
 		}
 	}
 	private void addTrait(ref List<string> list, string trait) {
 		if (!string.IsNullOrEmpty(trait)) {
+			updateChart(PersonalityGeneralizer.getPersonality(trait));
 			list.Add(trait);
 		}
+	}
+
+	private void updateChart(Personality personality) {
+		int index = -1;
+		switch (personality) {
+			case Personality.OPENNESS:
+				index = 0;
+				break;
+			case Personality.EXTRAVERSION:
+				index = 1;
+				break;
+			case Personality.CONSCIENTIOUS:
+				index = 2;
+				break;
+			case Personality.NEUROTICISM:
+				index = 3;
+				break;
+			case Personality.AGREEABLENESS:
+				index = 4;
+				break;
+		}
+		int factor = 1;
+		float chanceForNegative = 0.1f;
+		if (Random.Range(0.0f, 1.0f) < chanceForNegative) {
+			factor = -1;
+		}
+		float defaultUpdateStep = 0.75f * factor;
+		float oldParam = personalityChart.GetParameter(index);
+		float newParam = oldParam + defaultUpdateStep;
+		if (newParam >= 1) {
+			newParam = 1;
+		} else if (newParam <= 0) {
+			newParam = 0;
+		}
+		personalityChart.SetParameter(index, newParam);
+
 	}
 
 	private void setTextFromSavedTraits() {
@@ -161,6 +211,5 @@ public class TraitsChartController : MonoBehaviour {
 			toShow.AddRange(savedTraits);
 		}
 
-		traitsList.text = string.Join("\n", toShow.ToArray());
 	}
 }

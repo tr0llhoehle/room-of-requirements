@@ -20,10 +20,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 947
-  m_MinSize: {x: 681, y: 471}
-  m_MaxSize: {x: 14002, y: 14021}
+  m_MinSize: {x: 681, y: 492}
+  m_MaxSize: {x: 14004, y: 14042}
   vertical: 0
-  controlID: 5238
+  controlID: 25970
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -121,10 +121,10 @@ MonoBehaviour:
     y: 0
     width: 1278
     height: 947
-  m_MinSize: {x: 404, y: 471}
-  m_MaxSize: {x: 10000, y: 14021}
+  m_MinSize: {x: 404, y: 492}
+  m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 5239
+  controlID: 25971
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -148,7 +148,7 @@ MonoBehaviour:
   m_MinSize: {x: 404, y: 221}
   m_MaxSize: {x: 8004, y: 4021}
   vertical: 0
-  controlID: 5176
+  controlID: 25972
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -203,9 +203,9 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 5af9fdff
-    m_LastClickedID: -132774
-    m_ExpandedIDs: 167ffeff9a07ffffb826ffff08d7ffff9efbffff00000000022800000a2800003c2800007c2800000a2a0000
+    m_SelectedIDs: cea0ffff
+    m_LastClickedID: -24370
+    m_ExpandedIDs: 3e27faff14cafbff38dbfbfffef0fcff3e98fdffbca0ffffc0a0ffffc8a0ffff00faffff02faffff00000000842c0000902c0000ca2c0000e82c0000022d0000202d0000d42d0000062e00007a430000a0430000aa430000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -225,6 +225,7 @@ MonoBehaviour:
     m_SearchString: 
   m_ExpandedScenes:
   - monitor
+  - RadarChart
   m_CurrenRootInstanceID: 0
   m_Locked: 0
   m_CurrentSortingName: TransformSorting
@@ -281,14 +282,14 @@ MonoBehaviour:
     height: 610
   m_PersistentViewDataDictionary: {fileID: 0}
   m_SceneLighting: 1
-  lastFramingTime: 709.9249893711553
+  lastFramingTime: 6394.529505554435
   m_2DMode: 1
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 527.839, y: 167.084, z: 7.0589333}
+    m_Target: {x: 668.6207, y: 133.83316, z: -1.795438}
     speed: 2
-    m_Value: {x: 527.839, y: 167.084, z: 7.0589333}
+    m_Value: {x: 668.6207, y: 133.83316, z: -1.795438}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -316,9 +317,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 362.83585
+    m_Target: 499.93103
     speed: 2
-    m_Value: 362.83585
+    m_Value: 499.93103
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -394,19 +395,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets
+    - Assets/AnimatedProgressbar/Example
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets
+  - Assets/AnimatedProgressbar/Example
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\Misc Projects\room-of-requirements\Security Room
   m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 5e270000
-    m_LastClickedID: 10078
-    m_ExpandedIDs: 000000005e27000000ca9a3bffffff7f
+    m_SelectedIDs: fe420000
+    m_LastClickedID: 17150
+    m_ExpandedIDs: 00000000f82b00000043000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -434,7 +435,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000005e27000000ca9a3bffffff7f
+    m_ExpandedIDs: 00000000f82b00000043000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -459,8 +460,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 5af9fdff
-    m_LastClickedInstanceID: -132774
+    m_SelectedInstanceIDs: cea0ffff
+    m_LastClickedInstanceID: -24370
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: 00000000
     m_RenameOverlay:
@@ -509,10 +510,10 @@ MonoBehaviour:
     y: 0
     width: 642
     height: 947
-  m_MinSize: {x: 277, y: 192}
-  m_MaxSize: {x: 4002, y: 8042}
+  m_MinSize: {x: 277, y: 171}
+  m_MaxSize: {x: 4002, y: 8021}
   vertical: 1
-  controlID: 5120
+  controlID: 25844
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52

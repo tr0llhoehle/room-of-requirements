@@ -51,6 +51,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\AnimatedProgressbar\Example\Example.cs" />
+     <Compile Include="Assets\AnimatedProgressbar\Scripts\AnimatedProgressbar.cs" />
      <Compile Include="Assets\CameraImage.cs" />
      <Compile Include="Assets\chart\RadarChart.cs" />
      <Compile Include="Assets\ClockAnimator.cs" />
@@ -58,6 +60,8 @@
      <Compile Include="Assets\personality.analyzer\AdditionalColorTraits.cs" />
      <Compile Include="Assets\personality.analyzer\ColorPersonality.cs" />
      <Compile Include="Assets\personality.analyzer\GeneralizedPersonality.cs" />
+     <Compile Include="Assets\personality.analyzer\Personality.cs" />
+     <Compile Include="Assets\personality.analyzer\PersonalityGeneralizer.cs" />
      <Compile Include="Assets\personality.analyzer\ProContraColorTraits.cs" />
      <Compile Include="Assets\PersonalityInfo.cs" />
      <Compile Include="Assets\PersonInfo.cs" />
@@ -65,6 +69,7 @@
      <Compile Include="Assets\ui\PersonalityBar.cs" />
      <Compile Include="Assets\ui\PersonInfoController.cs" />
      <Compile Include="Assets\ui\ProductSatisfactionController.cs" />
+     <Compile Include="Assets\ui\ProgressController.cs" />
      <Compile Include="Assets\ui\SharedInfo.cs" />
      <Compile Include="Assets\ui\TraitsChartController.cs" />
      <Compile Include="Assets\Utility.cs" />
