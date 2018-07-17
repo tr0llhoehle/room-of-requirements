@@ -14,11 +14,11 @@ public class PersonalityBar : MonoBehaviour {
 	private string currentSubjectId = "";
 	// Use this for initialization
 	void Start() {
-		//if (Dummy.ENABLED) {
-		//	setAllBars(Dummy.getDummyRandomizedGeneralizedPersonality());
-		//} else {
+		if (Dummy.ENABLED) {
+			setAllBars(Dummy.getDummyRandomizedGeneralizedPersonality());
+		} else {
 			StartCoroutine(updateBars());
-		//}
+		}
 
 	}
 
