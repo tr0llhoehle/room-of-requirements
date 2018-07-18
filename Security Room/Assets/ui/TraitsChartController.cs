@@ -11,6 +11,7 @@ public class TraitsChartController : MonoBehaviour {
 	private SharedInfo sharedInfo;
 	private string currentSubjectId = "";
 	private List<string> savedTraits = new List<string>();
+	private Dictionary<Personality, int> personalityUpdateMap;
 
 	public void Start() {
 		
@@ -19,12 +20,25 @@ public class TraitsChartController : MonoBehaviour {
 			setProContraList(colorPersonality);
 			setAdditionalTraits(colorPersonality);
 		} else {
-			for (int i = 0; i < personalityChart.GetParameters().Count; i++) {
-				personalityChart.SetParameter(i, 0);
-			}
+			resetPersonalityChart();
+
 			StartCoroutine(updateTexts());
 		}
 
+	}
+
+	public void resetPersonalityChart() {
+		for (int i = 0; i < personalityChart.GetParameters().Count; i++) {
+			personalityChart.SetParameter(i, 0);
+		}
+
+		personalityUpdateMap = new Dictionary<Personality, int> {
+			{ Personality.OPENNESS, 0 },
+			{ Personality.EXTRAVERSION, 0 },
+			{ Personality.CONSCIENTIOUS, 0 },
+			{ Personality.NEUROTICISM, 0 },
+			{ Personality.AGREEABLENESS, 0 },
+		};
 	}
 
 	// public void Update() {
@@ -168,6 +182,11 @@ public class TraitsChartController : MonoBehaviour {
 	}
 
 	private void updateChart(Personality personality) {
+		if (personalityUpdateMap[personality] < 7) {
+			personalityUpdateMap[personality] = personalityUpdateMap[personality] + 1;
+		} else {
+			return;
+		}
 		int index = -1;
 		switch (personality) {
 			case Personality.OPENNESS:
@@ -191,9 +210,11 @@ public class TraitsChartController : MonoBehaviour {
 		if (Random.Range(0.0f, 1.0f) < chanceForNegative) {
 			factor = -1;
 		}
-		float defaultUpdateStep = 0.75f * factor;
+		float defaultUpdateStep = Random.Range(0.08f, 0.17f) * factor;
 		float oldParam = personalityChart.GetParameter(index);
+
 		float newParam = oldParam + defaultUpdateStep;
+
 		if (newParam >= 1) {
 			newParam = 1;
 		} else if (newParam <= 0) {

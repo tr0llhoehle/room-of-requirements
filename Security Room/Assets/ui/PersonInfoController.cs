@@ -14,7 +14,7 @@ public class PersonInfoController : MonoBehaviour {
 	public Text heightUncertainty;
 	public Text weightUncertainty;
 
-	public RadarChart personalityChart; 
+	public TraitsChartController traitsChartController; 
 
     private IEnumerator updater;
 
@@ -61,9 +61,7 @@ public class PersonInfoController : MonoBehaviour {
 			weight.text = personInfo.weight + "";
 
 			setUncertainty();
-			for (int i = 0; i < personalityChart.GetParameters().Count; i++) {
-				personalityChart.SetParameter(i, 0);
-			}
+			traitsChartController.resetPersonalityChart();
 		}
 	}
 
@@ -73,7 +71,7 @@ public class PersonInfoController : MonoBehaviour {
 		float guessWeight = Random.Range(4, 10);
 
 		ageUncertainty.text = "(± " + guessAge + ")";
-		weightUncertainty.text = "(± " + guessHeight + ")";
+		weightUncertainty.text = "(± " + guessWeight + ")";
 		heightUncertainty.text = "(± " + guessHeight + ")";
 	}
 
