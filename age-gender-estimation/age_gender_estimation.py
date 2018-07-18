@@ -45,7 +45,8 @@ def main(img):
     weight_file = None #args.weight_file
 
     if not weight_file:
-        weight_file = os.path.join("pretrained_models", "weights.18-4.06.hdf5")
+        weight_file = os.path.abspath(os.path.join("pretrained_models", "weights.18-4.06.hdf5"))
+    print(weight_file)
 
     # for face detection
     detector = dlib.get_frontal_face_detector()
@@ -101,6 +102,7 @@ app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'GET':
+        print("Got get")
         #url = 'https://upload.wikimedia.org/wikipedia/commons/8/8d/President_Barack_Obama.jpg'
         url = IMAGE_URL
         response = requests.get(url, stream=True)
@@ -114,6 +116,7 @@ def upload_file():
         else:
             return "\"state\":\"error\""
     if request.method == 'POST':
+        print("Got post")
         # check if the post request has the file part
         if 'file' not in request.files:
             return "{"+"\"state\":\"error\""+"}"

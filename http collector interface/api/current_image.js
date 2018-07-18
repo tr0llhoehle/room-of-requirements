@@ -19,12 +19,18 @@ function getImage(req, res) {
 }
 
 function get_gender_age(cb) {
-  request('http://localhost:7000/', function(error, response, body) {
+  request('http://localhost:7001/', function(error, response, body) {
     if (error != null)
     {
       return cb(error, null);
     }
-    return cb(null, JSON.parse(body));  
+	
+	try {
+		let data = JSON.parse(body);
+		return cb(null, data);  
+	} catch (e) {
+		return cb(e);
+	}
   })
 }
 
