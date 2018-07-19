@@ -1,0 +1,8 @@
+
+public enum Personality {
+	OPENNESS,
+	NEUROTICISM,
+	AGREEABLENESS,
+	EXTRAVERSION,
+	CONSCIENTIOUS
+}

@@ -12,8 +12,9 @@ public class DisplayScript : MonoBehaviour
 		if (Display.displays.Length == 4) {
 			Debug.Log ("Using multi-display support");
 			Display.displays [1].Activate();
+			// This is the security room display
 			Display.displays [2].Activate();
-            Display.displays [3].Activate();
+			//Display.displays [3].Activate();
         } else {
 			Debug.Log ("Activating split screen mode.");
 			Camera left = GameObject.Find ("Left Camera").GetComponent<Camera>();

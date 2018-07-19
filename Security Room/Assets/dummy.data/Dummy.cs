@@ -3,7 +3,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class Dummy {
-	public static readonly bool ENABLED = true;
+	public static readonly bool ENABLED = false;
 
 	public static ColorPersonality getDummyColorPersonality() {
 		ColorPersonality personality = new ColorPersonality();

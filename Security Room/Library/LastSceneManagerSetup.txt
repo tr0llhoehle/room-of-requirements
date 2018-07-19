@@ -2,3 +2,6 @@ sceneSetups:
 - path: Assets/monitor.unity
   isLoaded: 1
   isActive: 1
+- path: Assets/chart/RadarChart.unity
+  isLoaded: 0
+  isActive: 0

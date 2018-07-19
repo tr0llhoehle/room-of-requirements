@@ -11,7 +11,7 @@ public class RadarChart : BaseMeshEffect {
 
 	[SerializeField]
 	float[] parameters;
-	public IEnumerable<float> GetParameters() { return parameters; }
+	public ICollection<float> GetParameters() { return parameters; }
 	public void SetParameters(float[] parameters) { this.parameters = parameters; this.graphic.SetVerticesDirty(); }
 	public float GetParameter(int index) { return index < parameters.Length ? parameters[index] : default(float); }
 	public void SetParameter(int index, float parameter) {
