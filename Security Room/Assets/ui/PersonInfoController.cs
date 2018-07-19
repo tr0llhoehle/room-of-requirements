@@ -19,8 +19,6 @@ public class PersonInfoController : MonoBehaviour {
     private IEnumerator updater;
 
 	private string currentSubjectId  = "";
-
-	private int updateCount = 0;
 	void Start() {
         if (Dummy.ENABLED) {
         	setPersonInfo(Dummy.getDummyPersonInfo());
@@ -63,11 +61,7 @@ public class PersonInfoController : MonoBehaviour {
 		weight.text = personInfo.weight + "";
 
 		setUncertainty();
-		if (updateCount > 15) {
-			traitsChartController.resetPersonalityChart();
-			updateCount = 0;
-		}
-		updateCount++;
+		traitsChartController.resetPersonalityChart();
 		// }
 	}
 
