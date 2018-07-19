@@ -2,6 +2,8 @@ import os
 from flask import Flask, request, redirect, url_for
 from werkzeug.utils import secure_filename
 
+import queue
+import threading
 import os
 import cv2
 import dlib
@@ -37,72 +39,63 @@ def draw_label(image, point, label, font=cv2.FONT_HERSHEY_SIMPLEX,
     cv2.rectangle(image, (x, y - size[1]), (x + size[0], y), (255, 0, 0), cv2.FILLED)
     cv2.putText(image, label, point, font, font_scale, (255, 255, 255), thickness)
 
+img_size = 64
 
-def main(img):
-    #args = get_args()
-    depth = 16 #args.depth
-    k = 8 #args.width
-    weight_file = None #args.weight_file
+input_queue = queue.Queue(1)
+output_queue = queue.Queue(1)
 
-    if not weight_file:
-        weight_file = os.path.join("pretrained_models", "weights.18-4.06.hdf5")
-
+def worker():
+    depth = 16
+    k = 8
+    weight_file = os.path.join("pretrained_models", "weights.18-4.06.hdf5")
     # for face detection
     detector = dlib.get_frontal_face_detector()
-
     # load model and weights
-    img_size = 64
     model = WideResNet(img_size, depth=depth, k=k)()
     model.load_weights(weight_file)
 
-    # capture video
-    #cap = cv2.VideoCapture(0)
-    #cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
-    #cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+    while True:
+        img = input_queue.get()
+        print("Got new job")
 
-    #while True:
-    # get video frame
-    #ret, img = cap.read()
+        input_img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        img_h, img_w, _ = np.shape(input_img)
 
-    #if not ret:
-    #    print("error: failed to capture image")
-    #    return -1
+        # detect faces using dlib detector
+        detected = detector(input_img, 1)
+        faces = np.empty((len(detected), img_size, img_size, 3))
 
-    input_img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    img_h, img_w, _ = np.shape(input_img)
+        for i, d in enumerate(detected):
+            x1, y1, x2, y2, w, h = d.left(), d.top(), d.right() + 1, d.bottom() + 1, d.width(), d.height()
+            xw1 = max(int(x1 - 0.4 * w), 0)
+            yw1 = max(int(y1 - 0.4 * h), 0)
+            xw2 = min(int(x2 + 0.4 * w), img_w - 1)
+            yw2 = min(int(y2 + 0.4 * h), img_h - 1)
+            cv2.rectangle(img, (x1, y1), (x2, y2), (255, 0, 0), 2)
+            # cv2.rectangle(img, (xw1, yw1), (xw2, yw2), (255, 0, 0), 2)
+            faces[i,:,:,:] = cv2.resize(img[yw1:yw2 + 1, xw1:xw2 + 1, :], (img_size, img_size))
 
-    # detect faces using dlib detector
-    detected = detector(input_img, 1)
-    faces = np.empty((len(detected), img_size, img_size, 3))
-
-    for i, d in enumerate(detected):
-        x1, y1, x2, y2, w, h = d.left(), d.top(), d.right() + 1, d.bottom() + 1, d.width(), d.height()
-        xw1 = max(int(x1 - 0.4 * w), 0)
-        yw1 = max(int(y1 - 0.4 * h), 0)
-        xw2 = min(int(x2 + 0.4 * w), img_w - 1)
-        yw2 = min(int(y2 + 0.4 * h), img_h - 1)
-        cv2.rectangle(img, (x1, y1), (x2, y2), (255, 0, 0), 2)
-        # cv2.rectangle(img, (xw1, yw1), (xw2, yw2), (255, 0, 0), 2)
-        faces[i,:,:,:] = cv2.resize(img[yw1:yw2 + 1, xw1:xw2 + 1, :], (img_size, img_size))
-
-    if len(detected) > 0:
-        # predict ages and genders of the detected faces
-        results = model.predict(faces)
-        predicted_genders = results[0]
-        ages = np.arange(0, 101).reshape(101, 1)
-        predicted_ages = results[1].dot(ages).flatten()
-        label = "\"state\":\"success\",\"age\": {}, \"gender\": \"{}\"".format(int(predicted_ages[0]), "f" if predicted_genders[0][0] > 0.5 else "m")
-        #print(label)
-        return label
-    return "\"state\":\"error\""
+        label = None
+        if len(detected) > 0:
+            # predict ages and genders of the detected faces
+            results = model.predict(faces)
+            predicted_genders = results[0]
+            ages = np.arange(0, 101).reshape(101, 1)
+            predicted_ages = results[1].dot(ages).flatten()
+            label = "\"state\":\"success\",\"age\": {}, \"gender\": \"{}\"".format(int(predicted_ages[0]), "f" if predicted_genders[0][0] > 0.5 else "m")
+        else:
+            label = "\"state\":\"error\""
+        print("Finished job:" + label)
+        output_queue.put(label)
+        input_queue.task_done()
 
 app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'GET':
-        #url = 'https://upload.wikimedia.org/wikipedia/commons/8/8d/President_Barack_Obama.jpg'
-        url = IMAGE_URL
+        url = 'https://upload.wikimedia.org/wikipedia/commons/8/8d/President_Barack_Obama.jpg'
+        #url = IMAGE_URL
         response = requests.get(url, stream=True)
         in_memory_file = io.BytesIO()
         shutil.copyfileobj(response.raw, in_memory_file)
@@ -110,7 +103,10 @@ def upload_file():
         color_image_flag = 1
         img = cv2.imdecode(data, color_image_flag)
         if img is not None:
-            return "{"+main(img)+"}"
+            input_queue.put(img)
+            result = output_queue.get()
+            output_queue.task_done()
+            return "{"+result+"}"
         else:
             return "\"state\":\"error\""
     if request.method == 'POST':
@@ -129,4 +125,16 @@ def upload_file():
             color_image_flag = 1
             img = cv2.imdecode(data, color_image_flag)
 
-            return "{"+main(img)+"}"
+            input_queue.put(img)
+            result = output_queue.get()
+            output_queue.task_done()
+            return "{"+result+"}"
+
+if __name__ == '__main__':
+    thread = threading.Thread(target = worker, args=())
+    thread.daemon = True
+    thread.start()
+    app.run(debug=False, port=7000)
+    #thread.join()
+    #input_queue.join()
+    #output_queue.join()
