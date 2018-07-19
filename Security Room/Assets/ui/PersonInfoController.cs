@@ -47,22 +47,22 @@ public class PersonInfoController : MonoBehaviour {
 
 	private void setPersonInfo(PersonInfo personInfo) {
 		SharedInfo.subjectId = personInfo.id;
-		if (!currentSubjectId.Equals(SharedInfo.subjectId)) {
-			currentSubjectId = SharedInfo.subjectId;
-			subjectId.text = currentSubjectId;
-			if (personInfo.age > 0)
-				age.text = personInfo.age + "";
-			if (personInfo.gender != "")
-				gender.text = personInfo.gender;
-			if (personInfo.height < 3) {
-				personInfo.height *= 100;
-			}
-			height.text = personInfo.height + "";
-			weight.text = personInfo.weight + "";
-
-			setUncertainty();
-			traitsChartController.resetPersonalityChart();
+		// if (!currentSubjectId.Equals(SharedInfo.subjectId)) {
+		currentSubjectId = SharedInfo.subjectId;
+		subjectId.text = currentSubjectId;
+		if (personInfo.age > 0)
+			age.text = personInfo.age + "";
+		if (personInfo.gender != "")
+			gender.text = personInfo.gender;
+		if (personInfo.height < 3) {
+			personInfo.height *= 100;
 		}
+		height.text = personInfo.height + "";
+		weight.text = personInfo.weight + "";
+
+		setUncertainty();
+		traitsChartController.resetPersonalityChart();
+		// }
 	}
 
 	private void setUncertainty() {
