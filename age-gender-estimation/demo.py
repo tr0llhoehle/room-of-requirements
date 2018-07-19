@@ -5,7 +5,6 @@ import numpy as np
 import argparse
 from wide_resnet import WideResNet
 
-
 def get_args():
     parser = argparse.ArgumentParser(description="This script detects faces from web cam input, "
                                                  "and estimates age and gender for the detected faces.",
@@ -75,6 +74,8 @@ def main():
             # cv2.rectangle(img, (xw1, yw1), (xw2, yw2), (255, 0, 0), 2)
             faces[i,:,:,:] = cv2.resize(img[yw1:yw2 + 1, xw1:xw2 + 1, :], (img_size, img_size))
 
+        print(np.shape(faces))
+
         if len(detected) > 0:
             # predict ages and genders of the detected faces
             results = model.predict(faces)
@@ -83,20 +84,18 @@ def main():
             predicted_ages = results[1].dot(ages).flatten()
             label = "{}, {}".format(int(predicted_ages[0]), "F" if predicted_genders[0][0] > 0.5 else "M")
             print(label)
-            break
-
 
         # draw results
-        #for i, d in enumerate(detected):
-        #    label = "{}, {}".format(int(predicted_ages[i]),
-        #                            "F" if predicted_genders[i][0] > 0.5 else "M")
-        #    draw_label(img, (d.left(), d.top()), label)
+        for i, d in enumerate(detected):
+            label = "{}, {}".format(int(predicted_ages[i]),
+                                    "F" if predicted_genders[i][0] > 0.5 else "M")
+            draw_label(img, (d.left(), d.top()), label)
 
-        #cv2.imshow("result", img)
-        #key = cv2.waitKey(30)
+        cv2.imshow("result", img)
+        key = cv2.waitKey(30)
 
-        #if key == 27:
-        #break
+        if key == 27:
+            break
 
 
 if __name__ == '__main__':
