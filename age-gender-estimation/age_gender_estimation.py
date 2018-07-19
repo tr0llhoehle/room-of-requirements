@@ -53,12 +53,15 @@ def worker():
     # load model and weights
     model = WideResNet(img_size, depth=depth, k=k)()
     model.load_weights(weight_file)
+    print("Waiting for jobs")
 
     while True:
         img = input_queue.get()
         print("Got new job")
-
-        input_img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        input_img = img
+        #input_img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        #cv2.imshow('face', input_img)
+        cv2.waitKey(0)
         img_h, img_w, _ = np.shape(input_img)
 
         # detect faces using dlib detector
@@ -111,7 +114,6 @@ def upload_file():
         else:
             return "\"state\":\"error\""
     if request.method == 'POST':
-        print("Got post")
         # check if the post request has the file part
         if 'file' not in request.files:
             return "{"+"\"state\":\"error\""+"}"
@@ -136,7 +138,7 @@ if __name__ == '__main__':
     thread = threading.Thread(target = worker, args=())
     thread.daemon = True
     thread.start()
-    app.run(debug=False, port=7000)
+    app.run(debug=False, port=7001)
     #thread.join()
     #input_queue.join()
     #output_queue.join()
