@@ -17,6 +17,7 @@ public class PersonInfoController : MonoBehaviour {
 	public TraitsChartController traitsChartController; 
 
     private IEnumerator updater;
+	private int updateCount = 0;
 
 	private string currentSubjectId  = "";
 	void Start() {
@@ -60,13 +61,19 @@ public class PersonInfoController : MonoBehaviour {
 		height.text = personInfo.height + "";
 		weight.text = personInfo.weight + "";
 
-		setUncertainty();
-		traitsChartController.resetPersonalityChart();
+		if (updateCount % 5 == 0) {
+			setUncertainty();
+		}
+		if (updateCount > 15) {
+			traitsChartController.resetPersonalityChart();
+			updateCount = 0;
+		}
+		updateCount++;
 		// }
 	}
 
 	private void setUncertainty() {
-		float guessAge = Random.Range(1, 4);
+		float guessAge = Random.Range(3, 6);
 		float guessHeight = Random.Range(3, 12);
 		float guessWeight = Random.Range(4, 10);
 
