@@ -11,7 +11,7 @@ namespace KinectHTTPProxy
         private HTTPConnection connection = new HTTPConnection();
         private MovingAverage avg;
         private ulong lastImageUpdate = 0;
-        private ulong updatePeriode = 10000;
+        private ulong updatePeriode = 4000;
 
         public Kinect2HTTP()
         {
